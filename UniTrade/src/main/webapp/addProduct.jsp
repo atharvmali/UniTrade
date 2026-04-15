@@ -5,92 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Product</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #2c3e50;
-    padding: 15px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-}
-
-.navbar a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Container */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-}
-
-/* Form Card */
-.form-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    width: 350px;
-}
-
-.form-card h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Inputs */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Button */
-.btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #2ecc71;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #27ae60;
-}
-</style>
+<link rel="stylesheet" href="assets/css/theme.css">
 
 </head>
 <body>
 
 <!-- Navbar -->
 <div class="navbar">
-    <div>UniTrade 🎓</div>
+    <div class="navbar-brand">UniTrade</div>
     <div>
         <a href="home.jsp">Home</a>
         <a href="MyProductsServlet">My Products</a>
@@ -98,10 +20,11 @@ body {
 </div>
 
 <!-- Form -->
-<div class="container">
+<div class="page-shell top-align">
 
     <div class="form-card">
         <h2>Add Product</h2>
+        <p class="section-subtitle">List a new item with a photo and clear details.</p>
 
         <form action="AddProductServlet" method="post" enctype="multipart/form-data">
 

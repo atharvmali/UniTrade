@@ -6,129 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>All Products</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #2c3e50;
-    padding: 15px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-}
-
-.navbar a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Container */
-.container {
-    padding: 20px;
-}
-
-/* Filter Box */
-.filter-box {
-    background: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.filter-box input, .filter-box select {
-    padding: 8px;
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Buttons */
-.btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.apply-btn {
-    background-color: #3498db;
-    color: white;
-}
-
-.clear-btn {
-    background-color: #e74c3c;
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-}
-
-/* Grid */
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Card */
-.card {
-    background: white;
-    width: 220px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    overflow: hidden;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-/* Image */
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-/* Content */
-.card-body {
-    padding: 10px;
-}
-
-.title {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.price {
-    color: green;
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.desc {
-    font-size: 14px;
-    color: gray;
-}
-</style>
+<link rel="stylesheet" href="assets/css/theme.css">
 
 </head>
 <body>
 
 <!-- Navbar -->
 <div class="navbar">
-    <div>UniTrade 🎓</div>
+    <div class="navbar-brand">UniTrade</div>
     <div>
         <a href="home.jsp">Home</a>
         <a href="MyProductsServlet">My Products</a>
@@ -137,9 +22,13 @@ body {
 </div>
 
 <!-- Content -->
-<div class="container">
+<div class="page-shell top-align">
+<div class="page-content">
 
-    <h2 style="text-align:center;">Browse Products</h2>
+    <div class="page-header" style="text-align:center;">
+        <h2>Browse Products</h2>
+        <p>Explore listings with search, price filters, and sorting built into one clean view.</p>
+    </div>
 
     <!-- FILTER + SORT -->
     <div class="filter-box">
@@ -213,7 +102,7 @@ body {
         } else {
     %>
 
-    <p style="text-align:center;">No products found</p>
+    <p class="empty-state">No products found</p>
 
     <%
         }
@@ -221,6 +110,7 @@ body {
 
     </div>
 
+</div>
 </div>
 
 </body>

@@ -5,55 +5,33 @@
 <head>
 <meta charset="UTF-8">
 <title>UniTrade</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #3498db, #2ecc71);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-}
-
-.container {
-    background: rgba(0,0,0,0.3);
-    padding: 40px;
-    border-radius: 10px;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-a {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 20px;
-    background-color: white;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-a:hover {
-    background-color: #ddd;
-}
-</style>
+<link rel="stylesheet" href="assets/css/theme.css">
 
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome to UniTrade 🎓</h1>
-    <p>Buy & Sell within your campus</p>
+<div class="page-shell">
+    <div class="hero-card">
+        <div class="hero-eyebrow">Campus marketplace</div>
+        <h1 class="hero-title">Welcome to <span>UniTrade</span></h1>
+        <p class="hero-copy">Buy and sell within your campus through a clean, fast, and simple marketplace built for student life.</p>
 
-    <a href="login.jsp">Login</a>
-    <a href="register.jsp">Register</a>
+        <div class="hero-grid">
+            <div class="hero-stat">
+                <strong>Discover</strong>
+                Browse products with smooth filters and a modern shopping layout.
+            </div>
+            <div class="hero-stat">
+                <strong>List</strong>
+                Add your items in a few steps and manage them from one place.
+            </div>
+        </div>
+
+        <div class="hero-actions">
+            <a href="login.jsp">Login</a>
+            <a href="register.jsp">Register</a>
+        </div>
+    </div>
 </div>
 
 </body>
