@@ -31,36 +31,36 @@ public class ViewProductsServlet extends HttpServlet {
             String sort = request.getParameter("sort"); // ✅ NEW
 
             // 🔥 Base query
-            String query = "SELECT * FROM products WHERE 1=1";
+            String query = "SELECT p.*, u.name AS owner_name, u.email AS owner_email FROM products p JOIN users u ON p.seller_id = u.id WHERE 1=1";
 
             // 🔍 Search
             if (keyword != null && !keyword.trim().isEmpty()) {
-                query += " AND title LIKE ?";
+                query += " AND p.title LIKE ?";
             }
 
             // 🎯 Filter
             if (minPrice != null && !minPrice.trim().isEmpty()) {
-                query += " AND price >= ?";
+                query += " AND p.price >= ?";
             }
 
             if (maxPrice != null && !maxPrice.trim().isEmpty()) {
-                query += " AND price <= ?";
+                query += " AND p.price <= ?";
             }
 
             // 🔥 SORTING LOGIC
             if (sort != null && !sort.isEmpty()) {
                 switch (sort) {
                     case "price_asc":
-                        query += " ORDER BY price ASC";
+                        query += " ORDER BY p.price ASC";
                         break;
                     case "price_desc":
-                        query += " ORDER BY price DESC";
+                        query += " ORDER BY p.price DESC";
                         break;
                     case "name_asc":
-                        query += " ORDER BY title ASC";
+                        query += " ORDER BY p.title ASC";
                         break;
                     case "name_desc":
-                        query += " ORDER BY title DESC";
+                        query += " ORDER BY p.title DESC";
                         break;
                 }
             }
@@ -91,6 +91,9 @@ public class ViewProductsServlet extends HttpServlet {
                 p.setDescription(rs.getString("description"));
                 p.setPrice(rs.getDouble("price"));
                 p.setImage(rs.getString("image"));
+                p.setOwnerName(rs.getString("owner_name"));
+                p.setOwnerEmail(rs.getString("owner_email"));
+                p.setContactNumber(rs.getString("contact_number"));
 
                 list.add(p);
             }

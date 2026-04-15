@@ -30,6 +30,7 @@ public class AddProductServlet extends HttpServlet {
 	    String title = request.getParameter("title");
 	    String description = request.getParameter("description");
 	    String price = request.getParameter("price");
+	    String contactNumber = request.getParameter("contactNumber");
 
 	    HttpSession session = request.getSession();
 	    String email = (String) session.getAttribute("user");
@@ -91,7 +92,7 @@ public class AddProductServlet extends HttpServlet {
 
 	        // 🛒 Insert product
 	        PreparedStatement ps = con.prepareStatement(
-	            "INSERT INTO products(title, description, price, image, seller_id) VALUES (?, ?, ?, ?, ?)"
+	            "INSERT INTO products(title, description, price, image, seller_id, contact_number) VALUES (?, ?, ?, ?, ?, ?)"
 	        );
 
 	        ps.setString(1, title);
@@ -99,6 +100,7 @@ public class AddProductServlet extends HttpServlet {
 	        ps.setDouble(3, Double.parseDouble(price));
 	        ps.setString(4, imagePath);
 	        ps.setInt(5, userId);
+	        ps.setString(6, contactNumber);
 
 	        ps.executeUpdate();
 

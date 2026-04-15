@@ -29,7 +29,7 @@ public class SearchServlet extends HttpServlet {
             Connection con = DBConnection.getConnection();
 
             PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM products WHERE title LIKE ?"
+                "SELECT p.*, u.name AS owner_name, u.email AS owner_email FROM products p JOIN users u ON p.seller_id = u.id WHERE p.title LIKE ?"
             );
             ps.setString(1, "%" + keyword + "%");
 
@@ -42,6 +42,9 @@ public class SearchServlet extends HttpServlet {
                 p.setDescription(rs.getString("description"));
                 p.setPrice(rs.getDouble("price"));
                 p.setImage(rs.getString("image"));
+                p.setOwnerName(rs.getString("owner_name"));
+                p.setOwnerEmail(rs.getString("owner_email"));
+                p.setContactNumber(rs.getString("contact_number"));
 
                 list.add(p);
             }

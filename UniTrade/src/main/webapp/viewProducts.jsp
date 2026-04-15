@@ -94,6 +94,15 @@
             <div class="title"><%= p.getTitle() %></div>
             <div class="price">₹ <%= p.getPrice() %></div>
             <div class="desc"><%= p.getDescription() %></div>
+
+            <details class="contact-owner">
+                <summary class="btn contact-btn">Contact Owner</summary>
+                <div class="contact-details">
+                    <p><strong>Name:</strong> <%= p.getOwnerName() %></p>
+                    <p><strong>Email:</strong> <%= p.getOwnerEmail() %></p>
+                    <p><strong>Phone:</strong> <%= p.getContactNumber() %></p>
+                </div>
+            </details>
         </div>
     </div>
 

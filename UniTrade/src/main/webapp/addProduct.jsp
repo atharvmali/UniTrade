@@ -44,6 +44,11 @@
             </div>
 
             <div class="form-group">
+                <label>Contact Number</label>
+                <input type="text" name="contactNumber" placeholder="Enter your contact number" required>
+            </div>
+
+            <div class="form-group">
                 <label>Upload Image</label>
                 <input type="file" name="image" required>
             </div>
