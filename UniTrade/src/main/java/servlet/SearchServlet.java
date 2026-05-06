@@ -1,13 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
-import dao.DBConnection;
+import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,35 +17,13 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String keyword = request.getParameter("keyword");
-
-        List<Product> list = new ArrayList<>();
-
         try {
-            Connection con = DBConnection.getConnection();
+            String keyword = request.getParameter("keyword");
 
-            PreparedStatement ps = con.prepareStatement(
-                "SELECT p.*, u.name AS owner_name, u.email AS owner_email FROM products p JOIN users u ON p.seller_id = u.id WHERE p.title LIKE ?"
-            );
-            ps.setString(1, "%" + keyword + "%");
+            ProductDAO productDAO = new ProductDAO();
+            List<Product> products = productDAO.searchProducts(keyword);
 
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()){
-                Product p = new Product();
-                p.setId(rs.getInt("id"));
-                p.setTitle(rs.getString("title"));
-                p.setDescription(rs.getString("description"));
-                p.setPrice(rs.getDouble("price"));
-                p.setImage(rs.getString("image"));
-                p.setOwnerName(rs.getString("owner_name"));
-                p.setOwnerEmail(rs.getString("owner_email"));
-                p.setContactNumber(rs.getString("contact_number"));
-
-                list.add(p);
-            }
-
-            request.setAttribute("products", list);
+            request.setAttribute("products", products);
             request.getRequestDispatcher("viewProducts.jsp").forward(request, response);
 
         } catch (Exception e) {
