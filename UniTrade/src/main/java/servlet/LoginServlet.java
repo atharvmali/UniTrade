@@ -41,8 +41,11 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                boolean isAdmin = rs.getBoolean("is_admin");
+
                 HttpSession session = request.getSession();
                 session.setAttribute("user", email);
+                session.setAttribute("role", isAdmin ? "admin" : "user");
 
                 response.sendRedirect("home.jsp");
             } else {

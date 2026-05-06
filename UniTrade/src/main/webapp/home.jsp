@@ -23,6 +23,14 @@
     <div class="nav-links">
         <a href="ViewProductsServlet">All Products</a>
         <a href="MyProductsServlet">My Products</a>
+        <%
+            String role = (String) session.getAttribute("role");
+            if ("admin".equals(role)) {
+        %>
+            <a href="AdminDashboardServlet" class="admin-link">🔧 Admin Dashboard</a>
+        <%
+            }
+        %>
         <a href="LogoutServlet">Logout</a>
     </div>
 </div>
