@@ -1,22 +1,8 @@
-# 🎓 UniTrade - Campus Marketplace Platform
+# UniTrade
 
-<div align="center">
+UniTrade is a Java JSP/Servlet campus marketplace backed by MySQL. Students can register, log in, list items, browse listings, save products to a wishlist, and manage their own products. Admin users can review users, products, and recent activity from a protected dashboard.
 
-![UniTrade](https://img.shields.io/badge/UniTrade-v1.0-blue?style=for-the-badge&logo=java)
-![Java](https://img.shields.io/badge/Java-11+-orange?style=for-the-badge&logo=java)
-![Jakarta EE](https://img.shields.io/badge/Jakarta%20EE-JSP%2FServlet-green?style=for-the-badge)
-![MySQL](https://img.shields.io/badge/MySQL-8.0+-brightgreen?style=for-the-badge&logo=mysql)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-
-**A modern, fast, and simple marketplace platform built for students to buy, sell, and trade items within their campus community.**
-
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [API Docs](#-servlet-api-documentation) • [Architecture](#-architecture)
-
-</div>
-
----
-
-## 📖 Table of Contents
+## Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -33,84 +19,54 @@
 - [Contributing](#-contributing)
 - [License](#-license)
 
----
+## Overview
 
-## 🚀 Overview
+The application is organized around a small set of JSP pages and servlet endpoints. The current implementation focuses on marketplace basics rather than a large framework stack: authentication, product management, search, wishlist, and admin reporting.
 
-**UniTrade** is a campus-based e-commerce marketplace application designed specifically for college students. It provides a clean, intuitive interface for discovering, listing, and trading items within the campus community. Students can easily browse products, manage their listings, save favorite items to a wishlist, and connect with other students.
+## Features
 
-### Why UniTrade?
+### Authentication and access control
+- User registration and login
+- Session-based authentication
+- Logout
+- Admin role support through `users.is_admin`
 
-✨ **Student-Focused** - Built with campus life in mind  
-⚡ **Lightning Fast** - Optimized performance for smooth browsing  
-🔒 **Secure** - Protected authentication and data handling  
-📱 **Responsive** - Works on desktop and mobile devices  
-💬 **Transparent** - Direct contact info for easy communication  
+### Product management
+- Add products with title, description, price, image, contact number, condition, category, and campus location
+- View all products
+- Edit and delete personal listings
+- Mark listings as sold
 
----
+### Search and browsing
+- Keyword search across title, category, and campus location
+- Category filtering
+- Condition filtering
+- Minimum and maximum price filtering
+- Sorting by price or title
 
-## ✨ Features
+### Wishlist
+- Save a product to a wishlist
+- Remove a product from the wishlist
+- View saved products in a separate page
 
-### 👥 Authentication & User Management
-- ✅ User registration with email validation
-- ✅ Secure login system
-- ✅ Session-based authentication
-- ✅ User logout functionality
-- ✅ Admin role support
+### Admin dashboard
+- View total users and total products
+- Inspect recent products and recent users
+- Manage users and products from admin pages
 
-### 🛍️ Product Management
-- ✅ **Add Products** - List items with title, description, price, image
-- ✅ **Product Details** - Condition (New/Like New/Good/Fair), category, campus location
-- ✅ **Edit Products** - Update product information anytime
-- ✅ **Delete Products** - Remove listings
-- ✅ **Mark as Sold** - Update availability status
-- ✅ **Image Upload** - Upload product photos (auto-resize & storage)
-- ✅ **View Products** - Browse all active listings
-
-### 🔍 Search & Filtering
-- ✅ **Advanced Search** - Search by keyword, title, category, location
-- ✅ **Price Filter** - Filter by minimum and maximum price range
-- ✅ **Category Filter** - Browse by product categories
-- ✅ **Condition Filter** - Filter by product condition
-- ✅ **Smart Sorting** - Sort by price (asc/desc), name (asc/desc)
-
-### ❤️ Wishlist System
-- ✅ **Save Products** - Add items to your wishlist
-- ✅ **View Wishlist** - Organized wishlist page
-- ✅ **Remove from Wishlist** - Remove items with one click
-- ✅ **Seller Contact** - Direct contact info for wishlist items
-
-### 👨‍💼 Admin Dashboard
-- ✅ **Dashboard Overview** - Total users, total products, recent activity
-- ✅ **User Management** - View, edit, delete users
-- ✅ **Product Management** - Monitor all products
-- ✅ **Statistics** - Real-time marketplace statistics
-- ✅ **Recent Activity** - Track 5 most recent products and users
-
-### 📊 Additional Features
-- ✅ **My Products** - Personal product listings
-- ✅ **Contact Details** - Seller phone number & email
-- ✅ **Campus Location Tracking** - Know where items are located
-- ✅ **Sold Status** - Mark items as sold
-- ✅ **Responsive UI** - Modern, clean design
-
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technology |
 |----------|-----------|
-| **Backend** | Java, Jakarta EE (JSP/Servlet) |
+| **Backend** | Java, Jakarta Servlet API (JSP/Servlet) |
 | **Frontend** | HTML5, CSS3, JavaScript |
 | **Database** | MySQL 8.0+ |
-| **Server** | Apache Tomcat 9.0+ |
+| **Server** | Apache Tomcat 10+ |
 | **JDBC Driver** | MySQL Connector/J 9.4.0 |
 | **IDE** | Eclipse, IntelliJ IDEA |
 | **Java Version** | Java 11+ |
 
----
-
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 
@@ -125,7 +81,7 @@ java -version
 mysql --version
 # Required: MySQL 8.0 or higher
 
-# Apache Tomcat 9.0 or higher
+# Apache Tomcat 10.0 or higher
 # Download from: https://tomcat.apache.org/
 ```
 
@@ -160,6 +116,7 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
+    is_admin BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -195,8 +152,8 @@ CREATE TABLE IF NOT EXISTS wishlist (
 );
 
 -- Insert sample admin user
-INSERT INTO users (name, email, password) 
-VALUES ('Admin User', 'admin@unitrade.com', 'admin123');
+INSERT INTO users (name, email, password, is_admin)
+VALUES ('Admin User', 'admin@unitrade.com', 'admin123', TRUE);
 ```
 
 ### Step 3: Update Database Connection
@@ -210,7 +167,7 @@ public static Connection getConnection() {
         return DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/unitrade",
             "root",              // ← Change if your MySQL username differs
-            "admin"              // ← Change to your MySQL password
+            "mysqlroot"          // ← Change to your MySQL password
         );
     } catch (Exception e) {
         e.printStackTrace();
@@ -461,6 +418,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
+  is_admin BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -469,7 +427,8 @@ CREATE TABLE users (
 - `id`: Unique user identifier
 - `name`: Full name of user
 - `email`: Email address (unique)
-- `password`: Hashed password
+- `password`: Stored password value
+- `is_admin`: Admin flag used by `AdminUtility`
 - `created_at`: Registration timestamp
 
 #### Products Table
@@ -545,7 +504,7 @@ Response:
   - Failure: Redirect to login.jsp?error=1
 Session Attributes Set:
   - user: User email
-  - userId: User ID
+  - role: `admin` or `user`
 ```
 
 #### RegisterServlet
@@ -778,70 +737,43 @@ Response: Redirect to adminProducts.jsp
 
 ```
 UniTrade/
-│
-├── src/main/
-│   ├── java/
-│   │   ├── dao/
-│   │   │   └── DBConnection.java              # Database connection management
-│   │   │
-│   │   ├── model/
-│   │   │   └── Product.java                   # Product POJO
-│   │   │
-│   │   ├── servlet/
-│   │   │   ├── LoginServlet.java              # User login
-│   │   │   ├── RegisterServlet.java           # User registration
-│   │   │   ├── LogoutServlet.java             # User logout
-│   │   │   ├── AddProductServlet.java         # Add new product
-│   │   │   ├── EditProductServlet.java        # Edit product
-│   │   │   ├── UpdateProductServlet.java      # Update product
-│   │   │   ├── DeleteProductServlet.java      # Delete product
-│   │   │   ├── MarkSoldServlet.java           # Mark as sold
-│   │   │   ├── ViewProductsServlet.java       # Browse all products
-│   │   │   ├── SearchServlet.java             # Search products
-│   │   │   ├── MyProductsServlet.java         # User's listings
-│   │   │   ├── WishlistServlet.java           # View wishlist
-│   │   │   ├── SaveProductServlet.java        # Save to wishlist
-│   │   │   ├── RemoveWishlistServlet.java     # Remove from wishlist
-│   │   │   ├── AdminDashboardServlet.java     # Admin overview
-│   │   │   ├── AdminUsersServlet.java         # Manage users
-│   │   │   ├── AdminProductsServlet.java      # Manage products
-│   │   │   ├── AdminDeleteUserServlet.java    # Delete user
-│   │   │   └── AdminDeleteProductServlet.java # Delete product
-│   │   │
-│   │   └── util/
-│   │       └── AdminUtility.java              # Admin utility functions
-│   │
-│   └── webapp/
-│       ├── WEB-INF/
-│       │   ├── web.xml                        # Deployment descriptor
-│       │   └── lib/
-│       │       └── mysql-connector-j-9.4.0.jar
-│       │
-│       ├── assets/
-│       │   ├── css/
-│       │   │   └── theme.css                  # Application styles
-│       │   └── js/
-│       │       └── ui.js                      # UI interactions
-│       │
-│       ├── uploads/                           # Product images directory
-│       │
-│       ├── index.jsp                          # Landing page
-│       ├── login.jsp                          # Login page
-│       ├── register.jsp                       # Registration page
-│       ├── home.jsp                           # Home page (logged in)
-│       ├── addProduct.jsp                     # Add product form
-│       ├── editProduct.jsp                    # Edit product form
-│       ├── viewProducts.jsp                   # Browse products
-│       ├── myProducts.jsp                     # User's listings
-│       ├── wishlist.jsp                       # Wishlist page
-│       ├── adminDashboard.jsp                 # Admin dashboard
-│       ├── adminUsers.jsp                     # Admin users page
-│       └── adminProducts.jsp                  # Admin products page
-│
-├── database_update.sql                        # Database migrations
-├── PROJECT_ANALYSIS.md                        # Project analysis
-├── README.md                                  # This file
-└── .gitignore                                 # Git ignore rules
+├── src/main/java/
+│   ├── dao/DBConnection.java
+│   ├── model/Product.java
+│   ├── servlet/
+│   │   ├── LoginServlet.java
+│   │   ├── RegisterServlet.java
+│   │   ├── LogoutServlet.java
+│   │   ├── AddProductServlet.java
+│   │   ├── ViewProductsServlet.java
+│   │   ├── SearchServlet.java
+│   │   ├── MyProductsServlet.java
+│   │   ├── WishlistServlet.java
+│   │   ├── SaveProductServlet.java
+│   │   ├── RemoveWishlistServlet.java
+│   │   ├── MarkSoldServlet.java
+│   │   ├── AdminDashboardServlet.java
+│   │   ├── AdminUsersServlet.java
+│   │   ├── AdminProductsServlet.java
+│   │   ├── AdminDeleteUserServlet.java
+│   │   └── AdminDeleteProductServlet.java
+│   └── util/AdminUtility.java
+└── src/main/webapp/
+  ├── index.jsp
+  ├── login.jsp
+  ├── register.jsp
+  ├── home.jsp
+  ├── addProduct.jsp
+  ├── editProduct.jsp
+  ├── viewProducts.jsp
+  ├── myProducts.jsp
+  ├── wishlist.jsp
+  ├── adminDashboard.jsp
+  ├── adminUsers.jsp
+  ├── adminProducts.jsp
+  └── assets/
+    ├── css/theme.css
+    └── js/ui.js
 ```
 
 ---
@@ -862,7 +794,7 @@ public static Connection getConnection() {
         return DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/unitrade",  // Database URL
             "root",                                   // Username
-            "admin"                                   // Password
+          "mysqlroot"                               // Password
         );
     } catch (Exception e) {
         e.printStackTrace();
@@ -876,7 +808,7 @@ public static Connection getConnection() {
 - **Port:** 3306 (MySQL default)
 - **Database:** unitrade
 - **Username:** root
-- **Password:** admin (change in production!)
+- **Password:** mysqlroot (change in production!)
 - **Driver:** MySQL Connector/J 9.4.0
 
 ### File Upload Configuration
@@ -1020,21 +952,7 @@ Before submitting:
 
 ## 📜 License
 
-This project is licensed under the **MIT License** - see LICENSE file for details.
-
-```
-MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
+No license file is included in this repository.
 
 ---
 
@@ -1042,17 +960,9 @@ copies or substantial portions of the Software.
 
 ### Getting Help
 
-- **Documentation:** See README.md & PROJECT_ANALYSIS.md
-- **Issues:** Report bugs on GitHub Issues
-- **Discussions:** Use GitHub Discussions for questions
-
-### Contact Information
-
-| Contact | Details |
-|---------|---------|
-| **GitHub Issues** | [UniTrade Issues](https://github.com/your-repo/issues) |
-| **Email** | contact@unitrade.com |
-| **Discord** | [Join Community Server](https://discord.gg/unitrade) |
+- Review the servlet classes under `src/main/java/servlet/`
+- Check `DBConnection.java` if the app cannot connect to MySQL
+- Inspect the JSP pages under `src/main/webapp/` for the UI flow
 
 ---
 
