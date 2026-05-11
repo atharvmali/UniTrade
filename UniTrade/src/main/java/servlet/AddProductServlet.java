@@ -6,9 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import dao.ProductDAO;
-import dao.UserDAO;
+import dao.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,55 +19,104 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import model.Product;
 
 @WebServlet("/AddProductServlet")
 @MultipartConfig
 public class AddProductServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
 
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String price = request.getParameter("price");
-        String contactNumber = request.getParameter("contactNumber");
+	    String title = request.getParameter("title");
+	    String description = request.getParameter("description");
+	    String price = request.getParameter("price");
+	    String contactNumber = request.getParameter("contactNumber");
+	    String productCondition = request.getParameter("productCondition");
+	    String category = request.getParameter("category");
+	    String campusLocation = request.getParameter("campusLocation");
 
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("user");
+	    HttpSession session = request.getSession();
+	    String email = (String) session.getAttribute("user");
 
-        if (email == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
+	    // 🔒 Safety check
+	    if (email == null) {
+	        response.sendRedirect("login.jsp");
+	        return;
+	    }
 
-        try {
-            Part filePart = request.getPart("image");
-            String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
+	    // 📸 Get image
+	    Part filePart = request.getPart("image");
+	    String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
 
-            String projectPath = getServletContext().getRealPath("") + "uploads";
-            File projectDir = new File(projectPath);
-            if (!projectDir.exists()) projectDir.mkdirs();
+	    // 📁 1. Save in LOCAL folder (permanent storage)
+	    String uploadPath = System.getProperty("user.home") + File.separator + "Documents"
+	            + File.separator + "Projects_Storage" + File.separator + "UniTradeUploads";
 
-            String imagePath = "uploads/" + fileName;
-            filePart.write(projectPath + File.separator + fileName);
+	    File uploadDir = new File(uploadPath);
+	    if (!uploadDir.exists()) uploadDir.mkdirs();
 
-            Product product = new Product();
-            product.setTitle(title);
-            product.setDescription(description);
-            product.setPrice(Double.parseDouble(price));
-            product.setContactNumber(contactNumber);
+	    filePart.write(uploadPath + File.separator + fileName);
 
-            UserDAO userDAO = new UserDAO();
-            int userId = userDAO.getUserIdByEmail(email);
+	    // 📁 2. Copy file into PROJECT (for browser display)
+	    String projectPath = getServletContext().getRealPath("") + "uploads";
+	    File projectDir = new File(projectPath);
+	    if (!projectDir.exists()) projectDir.mkdirs();
 
-            ProductDAO productDAO = new ProductDAO();
-            productDAO.addProduct(product, userId, imagePath);
+	    File source = new File(uploadPath + File.separator + fileName);
+	    File dest = new File(projectPath + File.separator + fileName);
 
-            response.sendRedirect("home.jsp");
+	    try (InputStream in = new FileInputStream(source);
+	         OutputStream out = new FileOutputStream(dest)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	        byte[] buffer = new byte[1024];
+	        int length;
+
+	        while ((length = in.read(buffer)) > 0) {
+	            out.write(buffer, 0, length);
+	        }
+	    }
+
+	    // 🗄️ Store relative path in DB
+	    String imagePath = "uploads/" + fileName;
+
+	    try {
+	        Connection con = DBConnection.getConnection();
+
+	        // 🔍 Get user ID
+	        PreparedStatement psUser = con.prepareStatement(
+	            "SELECT id FROM users WHERE email=?"
+	        );
+	        psUser.setString(1, email);
+	        ResultSet rs = psUser.executeQuery();
+
+	        int userId = 0;
+	        if (rs.next()) {
+	            userId = rs.getInt("id");
+	        }
+
+	        // 🛒 Insert product
+	        PreparedStatement ps = con.prepareStatement(
+	            "INSERT INTO products(title, description, price, image, seller_id, contact_number, sold, product_condition, category, campus_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	        );
+
+	        ps.setString(1, title);
+	        ps.setString(2, description);
+	        ps.setDouble(3, Double.parseDouble(price));
+	        ps.setString(4, imagePath);
+	        ps.setInt(5, userId);
+	        ps.setString(6, contactNumber);
+	        ps.setBoolean(7, false);
+	        ps.setString(8, productCondition);
+	        ps.setString(9, category);
+	        ps.setString(10, campusLocation);
+
+	        ps.executeUpdate();
+
+	        response.sendRedirect("home.jsp");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+    
 }

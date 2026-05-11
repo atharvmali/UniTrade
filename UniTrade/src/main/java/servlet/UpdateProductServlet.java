@@ -1,14 +1,16 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import dao.ProductDAO;
+import dao.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Product;
 
 @WebServlet("/UpdateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
@@ -16,20 +18,32 @@ public class UpdateProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String price = request.getParameter("price");
+        String productCondition = request.getParameter("productCondition");
+        String category = request.getParameter("category");
+        String campusLocation = request.getParameter("campusLocation");
+        boolean sold = request.getParameter("sold") != null;
+
         try {
-            String id = request.getParameter("id");
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            String price = request.getParameter("price");
+            Connection con = DBConnection.getConnection();
 
-            Product product = new Product();
-            product.setId(Integer.parseInt(id));
-            product.setTitle(title);
-            product.setDescription(description);
-            product.setPrice(Double.parseDouble(price));
+            PreparedStatement ps = con.prepareStatement(
+                "UPDATE products SET title=?, description=?, price=?, sold=?, product_condition=?, category=?, campus_location=? WHERE id=?"
+            );
 
-            ProductDAO productDAO = new ProductDAO();
-            productDAO.updateProduct(product);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setDouble(3, Double.parseDouble(price));
+            ps.setBoolean(4, sold);
+            ps.setString(5, productCondition);
+            ps.setString(6, category);
+            ps.setString(7, campusLocation);
+            ps.setInt(8, Integer.parseInt(id));
+
+            ps.executeUpdate();
 
             response.sendRedirect("MyProductsServlet");
 

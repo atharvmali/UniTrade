@@ -16,6 +16,7 @@
     <div>
         <a href="home.jsp">Home</a>
         <a href="MyProductsServlet">My Products</a>
+        <a href="WishlistServlet">Wishlist</a>
     </div>
 </div>
 
@@ -49,8 +50,41 @@
             </div>
 
             <div class="form-group">
+                <label>Condition</label>
+                <select name="productCondition" required>
+                    <option value="">Select Condition</option>
+                    <option value="New">New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Used">Used</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Books">Books</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Campus Location</label>
+                <input type="text" name="campusLocation" placeholder="Example: Library, Hostel A, Main Gate" required>
+            </div>
+
+            <div class="form-group">
                 <label>Upload Image</label>
-                <input type="file" name="image" required>
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" name="image" id="imageInput" accept="image/*" required>
+                    <div class="drop-title">Drop photo here</div>
+                    <div class="drop-text">or click to choose image</div>
+                    <div class="file-name" id="fileName">No file selected</div>
+                </div>
             </div>
 
             <input type="submit" value="Add Product" class="btn">
@@ -59,6 +93,48 @@
     </div>
 
 </div>
+
+<script>
+    const dropZone = document.getElementById("dropZone");
+    const imageInput = document.getElementById("imageInput");
+    const fileName = document.getElementById("fileName");
+
+    dropZone.addEventListener("click", function () {
+        imageInput.click();
+    });
+
+    imageInput.addEventListener("change", function () {
+        showFileName();
+    });
+
+    dropZone.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        dropZone.classList.add("drag-over");
+    });
+
+    dropZone.addEventListener("dragleave", function () {
+        dropZone.classList.remove("drag-over");
+    });
+
+    dropZone.addEventListener("drop", function (e) {
+        e.preventDefault();
+        dropZone.classList.remove("drag-over");
+
+        if (e.dataTransfer.files.length > 0) {
+            imageInput.files = e.dataTransfer.files;
+            showFileName();
+        }
+    });
+
+    function showFileName() {
+        if (imageInput.files.length > 0) {
+            fileName.innerText = imageInput.files[0].name;
+        } else {
+            fileName.innerText = "No file selected";
+        }
+    }
+</script>
+<script src="assets/js/ui.js"></script>
 
 </body>
 </html>

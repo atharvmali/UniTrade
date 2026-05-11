@@ -10,6 +10,11 @@ public class Product {
     private String ownerName;
     private String ownerEmail;
     private String contactNumber;
+    private boolean sold;
+    private String productCondition;
+    private String category;
+    private String campusLocation;
+    private boolean saved;
 
     // Getter and Setter for id
     public int getId() {
@@ -78,5 +83,45 @@ public class Product {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
+
+    public String getProductCondition() {
+        return productCondition;
+    }
+
+    public void setProductCondition(String productCondition) {
+        this.productCondition = productCondition;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCampusLocation() {
+        return campusLocation;
+    }
+
+    public void setCampusLocation(String campusLocation) {
+        this.campusLocation = campusLocation;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
     }
 }

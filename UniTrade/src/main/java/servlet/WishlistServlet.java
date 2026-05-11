@@ -16,58 +16,58 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Product;
 
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/WishlistServlet")
+public class WishlistServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String keyword = request.getParameter("keyword");
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("user");
+
+        if (email == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
         List<Product> list = new ArrayList<>();
-        HttpSession session = request.getSession(false);
-        boolean isLoggedIn = session != null && session.getAttribute("user") != null;
 
         try {
             Connection con = DBConnection.getConnection();
 
-            String query = "SELECT p.id, p.title, p.description, p.price, p.image, p.sold, p.product_condition, "
-                + "p.category, p.campus_location";
-            if (isLoggedIn) {
-                query += ", u.name AS owner_name, u.email AS owner_email, p.contact_number";
-            }
-            query += " FROM products p JOIN users u ON p.seller_id = u.id "
-                + "WHERE p.title LIKE ? OR p.category LIKE ? OR p.campus_location LIKE ?";
-
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, "%" + keyword + "%");
-            ps.setString(2, "%" + keyword + "%");
-            ps.setString(3, "%" + keyword + "%");
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT p.id AS product_id, p.title, p.description, p.price, p.image, p.contact_number, "
+                + "p.sold, p.product_condition, p.category, p.campus_location, "
+                + "u.name AS owner_name, u.email AS owner_email FROM wishlist w "
+                + "JOIN products p ON w.product_id = p.id "
+                + "JOIN users u ON p.seller_id = u.id "
+                + "JOIN users buyer ON w.user_id = buyer.id "
+                + "WHERE buyer.email=? ORDER BY w.id DESC"
+            );
+            ps.setString(1, email);
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 Product p = new Product();
-                p.setId(rs.getInt("id"));
+                p.setId(rs.getInt("product_id"));
                 p.setTitle(rs.getString("title"));
                 p.setDescription(rs.getString("description"));
                 p.setPrice(rs.getDouble("price"));
                 p.setImage(rs.getString("image"));
-                if (isLoggedIn) {
-                    p.setOwnerName(rs.getString("owner_name"));
-                    p.setOwnerEmail(rs.getString("owner_email"));
-                    p.setContactNumber(rs.getString("contact_number"));
-                }
+                p.setOwnerName(rs.getString("owner_name"));
+                p.setOwnerEmail(rs.getString("owner_email"));
+                p.setContactNumber(rs.getString("contact_number"));
                 p.setSold(rs.getBoolean("sold"));
                 p.setProductCondition(rs.getString("product_condition"));
                 p.setCategory(rs.getString("category"));
                 p.setCampusLocation(rs.getString("campus_location"));
-
+                p.setSaved(true);
                 list.add(p);
             }
 
             request.setAttribute("products", list);
-            request.getRequestDispatcher("viewProducts.jsp").forward(request, response);
+            request.getRequestDispatcher("wishlist.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

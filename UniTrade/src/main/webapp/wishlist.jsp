@@ -1,5 +1,3 @@
-
-
 <%@ page import="java.util.*, model.Product" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,30 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Products</title>
+<title>Wishlist</title>
 <link rel="stylesheet" href="assets/css/theme.css">
-
 </head>
 <body>
 
-<!-- Navbar -->
 <div class="navbar">
     <div class="navbar-brand">UniTrade</div>
     <div>
         <a href="home.jsp">Home</a>
         <a href="ViewProductsServlet">All Products</a>
-        <a href="WishlistServlet">Wishlist</a>
+        <a href="MyProductsServlet">My Products</a>
         <a href="LogoutServlet">Logout</a>
     </div>
 </div>
 
-<!-- Content -->
 <div class="page-shell top-align">
 <div class="page-content">
 
     <div class="page-header">
-        <h2>My Products</h2>
-        <p>Manage the listings you have posted and keep them updated.</p>
+        <h2>Wishlist</h2>
+        <p>Products you saved for later.</p>
     </div>
 
     <div class="grid">
@@ -57,6 +52,7 @@
             <% } %>
             <div class="price">₹ <%= p.getPrice() %></div>
             <div class="desc"><%= p.getDescription() %></div>
+
             <div class="product-info">
                 <% if(p.getProductCondition() != null) { %>
                     <span>Condition: <%= p.getProductCondition() %></span>
@@ -65,20 +61,19 @@
                     <span>Location: <%= p.getCampusLocation() %></span>
                 <% } %>
             </div>
-            <!-- Buttons -->
-            <a class="btn edit" href="EditProductServlet?id=<%= p.getId() %>">Edit</a>
 
-            <% if(p.isSold()) { %>
-                <a class="btn available" href="MarkSoldServlet?id=<%= p.getId() %>&sold=false">Mark Available</a>
-            <% } else { %>
-                <a class="btn sold" href="MarkSoldServlet?id=<%= p.getId() %>&sold=true">Mark Sold</a>
+            <a class="btn saved-btn" href="RemoveWishlistServlet?id=<%= p.getId() %>">Remove</a>
+
+            <% if(!p.isSold()) { %>
+                <details class="contact-owner">
+                    <summary class="btn contact-btn">Contact Owner</summary>
+                    <div class="contact-details">
+                        <p><strong>Name:</strong> <%= p.getOwnerName() %></p>
+                        <p><strong>Email:</strong> <%= p.getOwnerEmail() %></p>
+                        <p><strong>Phone:</strong> <%= p.getContactNumber() %></p>
+                    </div>
+                </details>
             <% } %>
-            
-            <a class="btn delete" 
-               href="DeleteProductServlet?id=<%= p.getId() %>"
-               onclick="return confirm('Are you sure you want to delete?')">
-               Delete
-            </a>
         </div>
     </div>
 
@@ -87,7 +82,7 @@
         } else {
     %>
 
-    <p class="empty-state">No products found</p>
+    <p class="empty-state">No saved products yet</p>
 
     <%
         }

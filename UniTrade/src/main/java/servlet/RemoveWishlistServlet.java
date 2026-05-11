@@ -13,18 +13,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/DeleteProductServlet")
-public class DeleteProductServlet extends HttpServlet {
+@WebServlet("/RemoveWishlistServlet")
+public class RemoveWishlistServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
-
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("user");
+        String productId = request.getParameter("id");
 
-        // 🔒 Not logged in
         if (email == null) {
             response.sendRedirect("login.jsp");
             return;
@@ -33,10 +31,7 @@ public class DeleteProductServlet extends HttpServlet {
         try {
             Connection con = DBConnection.getConnection();
 
-            // 🔍 Get user ID
-            PreparedStatement psUser = con.prepareStatement(
-                "SELECT id FROM users WHERE email=?"
-            );
+            PreparedStatement psUser = con.prepareStatement("SELECT id FROM users WHERE email=?");
             psUser.setString(1, email);
             ResultSet rsUser = psUser.executeQuery();
 
@@ -45,17 +40,16 @@ public class DeleteProductServlet extends HttpServlet {
                 userId = rsUser.getInt("id");
             }
 
-            // 🔥 Delete ONLY if owner
-            PreparedStatement ps = con.prepareStatement(
-                "DELETE FROM products WHERE id=? AND seller_id=?"
-            );
+            if (userId != 0 && productId != null) {
+                PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM wishlist WHERE user_id=? AND product_id=?"
+                );
+                ps.setInt(1, userId);
+                ps.setInt(2, Integer.parseInt(productId));
+                ps.executeUpdate();
+            }
 
-            ps.setInt(1, Integer.parseInt(id));
-            ps.setInt(2, userId);
-
-            ps.executeUpdate();
-
-            response.sendRedirect("MyProductsServlet");
+            response.sendRedirect("WishlistServlet");
 
         } catch (Exception e) {
             e.printStackTrace();

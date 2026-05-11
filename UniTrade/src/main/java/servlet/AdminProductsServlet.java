@@ -74,6 +74,10 @@ public class AdminProductsServlet extends HttpServlet {
                 p.setOwnerName(rs.getString("owner_name"));
                 p.setOwnerEmail(rs.getString("owner_email"));
                 p.setContactNumber(rs.getString("contact_number"));
+                p.setSold(rs.getBoolean("sold"));
+                p.setProductCondition(rs.getString("product_condition"));
+                p.setCategory(rs.getString("category"));
+                p.setCampusLocation(rs.getString("campus_location"));
                 products.add(p);
             }
 

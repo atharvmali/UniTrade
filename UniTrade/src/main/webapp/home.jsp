@@ -23,11 +23,12 @@
     <div class="nav-links">
         <a href="ViewProductsServlet">All Products</a>
         <a href="MyProductsServlet">My Products</a>
+        <a href="WishlistServlet">Wishlist</a>
         <%
             String role = (String) session.getAttribute("role");
             if ("admin".equals(role)) {
         %>
-            <a href="AdminDashboardServlet" class="admin-link">🔧 Admin Dashboard</a>
+            <a href="AdminDashboardServlet" class="admin-link">Admin Dashboard</a>
         <%
             }
         %>
@@ -54,9 +55,9 @@
                 </div>
 
                 <div class="hero-actions home-actions">
-                    <a href="addProduct.jsp">➕ Add Product</a>
-                    <a href="ViewProductsServlet">🛒 Browse Products</a>
-                    <a href="MyProductsServlet">📦 My Products</a>
+                    <a href="addProduct.jsp">Add Product</a>
+                    <a href="ViewProductsServlet">Browse Products</a>
+                    <a href="MyProductsServlet">My Products</a>
                 </div>
             </div>
         </section>
@@ -66,5 +67,6 @@
 </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>

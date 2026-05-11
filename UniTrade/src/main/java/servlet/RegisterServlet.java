@@ -1,8 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import dao.UserDAO;
+import dao.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,14 +23,32 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try {
-            UserDAO userDAO = new UserDAO();
+        	
+        	
+            Connection con = DBConnection.getConnection();
+            
+            PreparedStatement check = con.prepareStatement(
+            	    "SELECT * FROM users WHERE email=?"
+            	);
+            	check.setString(1, email);
 
-            if(userDAO.userExists(email)){
-                response.sendRedirect("register.jsp?error=1");
-                return;
-            }
+            	ResultSet rs = check.executeQuery();
 
-            userDAO.registerUser(name, email, password);
+            	if(rs.next()){
+            	    response.sendRedirect("register.jsp?error=1");
+            	    return;
+            	}
+
+            PreparedStatement ps = con.prepareStatement(
+                "INSERT INTO users(name, email, password) VALUES (?, ?, ?)"
+            );
+
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, password);
+
+            ps.executeUpdate();
+
             response.getWriter().println("Registered Successfully");
             response.sendRedirect("login.jsp");
 

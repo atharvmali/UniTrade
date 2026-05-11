@@ -28,11 +28,13 @@
         </div>
 
         <div class="hero-actions">
+            <a href="ViewProductsServlet">Browse Products</a>
             <a href="login.jsp">Login</a>
             <a href="register.jsp">Register</a>
         </div>
     </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>

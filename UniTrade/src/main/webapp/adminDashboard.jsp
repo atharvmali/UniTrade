@@ -140,7 +140,7 @@
     <div class="navbar-brand">UniTrade</div>
 
     <div class="nav-links">
-        <a href="home.jsp">← Back to Home</a>
+        <a href="home.jsp">Back to Home</a>
         <a href="LogoutServlet">Logout</a>
     </div>
 </div>
@@ -170,7 +170,7 @@
 
     <!-- Recent Products -->
     <div class="admin-section">
-        <h2 class="section-title">📦 Recent Products</h2>
+        <h2 class="section-title">Recent Products</h2>
         <%
             List<Product> recentProducts = (List<Product>) request.getAttribute("recentProducts");
             if (recentProducts != null && !recentProducts.isEmpty()) {
@@ -210,7 +210,7 @@
 
     <!-- Recent Users -->
     <div class="admin-section">
-        <h2 class="section-title">👥 Recent Users</h2>
+        <h2 class="section-title">Recent Users</h2>
         <%
             List<String[]> recentUsers = (List<String[]>) request.getAttribute("recentUsers");
             if (recentUsers != null && !recentUsers.isEmpty()) {
@@ -248,7 +248,7 @@
 
     <!-- Quick Actions -->
     <div class="admin-section">
-        <h2 class="section-title">⚙️ Management</h2>
+        <h2 class="section-title">Management</h2>
         <div class="admin-actions">
             <a href="AdminUsersServlet" class="action-btn">Manage Users</a>
             <a href="AdminProductsServlet" class="action-btn">Moderate Products</a>
@@ -258,5 +258,6 @@
 </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>

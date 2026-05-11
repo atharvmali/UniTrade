@@ -1,8 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import dao.ProductDAO;
+import dao.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,14 +19,31 @@ public class EditProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String id = request.getParameter("id");
+
         try {
-            String id = request.getParameter("id");
+            Connection con = DBConnection.getConnection();
 
-            ProductDAO productDAO = new ProductDAO();
-            Product product = productDAO.getProductById(Integer.parseInt(id));
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT * FROM products WHERE id=?"
+            );
+            ps.setInt(1, Integer.parseInt(id));
 
-            if (product != null) {
-                request.setAttribute("product", product);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setTitle(rs.getString("title"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                p.setImage(rs.getString("image"));
+                p.setSold(rs.getBoolean("sold"));
+                p.setProductCondition(rs.getString("product_condition"));
+                p.setCategory(rs.getString("category"));
+                p.setCampusLocation(rs.getString("campus_location"));
+
+                request.setAttribute("product", p);
                 request.getRequestDispatcher("editProduct.jsp").forward(request, response);
             }
 

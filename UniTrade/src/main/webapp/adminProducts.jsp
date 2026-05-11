@@ -190,7 +190,7 @@
     <div class="navbar-brand">UniTrade</div>
 
     <div class="nav-links">
-        <a href="AdminDashboardServlet">← Dashboard</a>
+        <a href="AdminDashboardServlet">Dashboard</a>
         <a href="home.jsp">Home</a>
         <a href="LogoutServlet">Logout</a>
     </div>
@@ -221,7 +221,7 @@
     <!-- Products Table -->
     <div class="admin-section">
         <div class="section-header">
-            <h2 class="section-title">📦 All Products</h2>
+            <h2 class="section-title">All Products</h2>
             <span class="product-count">Total: <%= request.getAttribute("products") != null ? ((List) request.getAttribute("products")).size() : 0 %></span>
         </div>
 
@@ -236,6 +236,10 @@
                         <th>Product</th>
                         <th>Seller</th>
                         <th>Price</th>
+                        <th>Status</th>
+                        <th>Category</th>
+                        <th>Condition</th>
+                        <th>Location</th>
                         <th>Contact</th>
                         <th>Action</th>
                     </tr>
@@ -249,6 +253,10 @@
                             <td><span class="product-title" title="<%= p.getTitle() %>"><%= p.getTitle() %></span></td>
                             <td><%= p.getOwnerName() %> (<%= p.getOwnerEmail() %>)</td>
                             <td><span class="price">₹<%= String.format("%.2f", p.getPrice()) %></span></td>
+                            <td><%= p.isSold() ? "Sold" : "Available" %></td>
+                            <td><%= p.getCategory() != null ? p.getCategory() : "" %></td>
+                            <td><%= p.getProductCondition() != null ? p.getProductCondition() : "" %></td>
+                            <td><%= p.getCampusLocation() != null ? p.getCampusLocation() : "" %></td>
                             <td><%= p.getContactNumber() %></td>
                             <td>
                                 <button class="delete-btn" onclick="if(confirm('Delete this product?')) { window.location='AdminDeleteProductServlet?id=<%= p.getId() %>'; }">Delete</button>
@@ -268,10 +276,11 @@
         %>
     </div>
 
-    <a href="AdminDashboardServlet" class="back-btn">← Back to Dashboard</a>
+    <a href="AdminDashboardServlet" class="back-btn">Back to Dashboard</a>
 
 </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>

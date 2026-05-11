@@ -188,7 +188,7 @@
     <div class="navbar-brand">UniTrade</div>
 
     <div class="nav-links">
-        <a href="AdminDashboardServlet">← Dashboard</a>
+        <a href="AdminDashboardServlet">Dashboard</a>
         <a href="home.jsp">Home</a>
         <a href="LogoutServlet">Logout</a>
     </div>
@@ -216,7 +216,7 @@
     <!-- Users Table -->
     <div class="admin-section">
         <div class="section-header">
-            <h2 class="section-title">👥 All Users</h2>
+            <h2 class="section-title">All Users</h2>
             <span class="user-count">Total: <%= request.getAttribute("users") != null ? ((List) request.getAttribute("users")).size() : 0 %></span>
         </div>
 
@@ -278,10 +278,11 @@
         %>
     </div>
 
-    <a href="AdminDashboardServlet" class="back-btn">← Back to Dashboard</a>
+    <a href="AdminDashboardServlet" class="back-btn">Back to Dashboard</a>
 
 </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>

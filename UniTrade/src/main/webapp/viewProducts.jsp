@@ -10,14 +10,24 @@
 
 </head>
 <body>
+<%
+    boolean isLoggedIn = session.getAttribute("user") != null;
+%>
 
 <!-- Navbar -->
 <div class="navbar">
     <div class="navbar-brand">UniTrade</div>
     <div>
-        <a href="home.jsp">Home</a>
-        <a href="MyProductsServlet">My Products</a>
-        <a href="LogoutServlet">Logout</a>
+        <% if(isLoggedIn) { %>
+            <a href="home.jsp">Home</a>
+            <a href="MyProductsServlet">My Products</a>
+            <a href="WishlistServlet">Wishlist</a>
+            <a href="LogoutServlet">Logout</a>
+        <% } else { %>
+            <a href="index.jsp">Home</a>
+            <a href="login.jsp">Login</a>
+            <a href="register.jsp">Register</a>
+        <% } %>
     </div>
 </div>
 
@@ -37,6 +47,23 @@
             <!-- Search -->
             <input type="text" name="keyword" placeholder="Search..."
                 value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : "" %>">
+
+            <select name="category">
+                <option value="">All Categories</option>
+                <option value="Books" <%= "Books".equals(request.getParameter("category")) ? "selected" : "" %>>Books</option>
+                <option value="Electronics" <%= "Electronics".equals(request.getParameter("category")) ? "selected" : "" %>>Electronics</option>
+                <option value="Furniture" <%= "Furniture".equals(request.getParameter("category")) ? "selected" : "" %>>Furniture</option>
+                <option value="Clothing" <%= "Clothing".equals(request.getParameter("category")) ? "selected" : "" %>>Clothing</option>
+                <option value="Sports" <%= "Sports".equals(request.getParameter("category")) ? "selected" : "" %>>Sports</option>
+                <option value="Other" <%= "Other".equals(request.getParameter("category")) ? "selected" : "" %>>Other</option>
+            </select>
+
+            <select name="condition">
+                <option value="">All Conditions</option>
+                <option value="New" <%= "New".equals(request.getParameter("condition")) ? "selected" : "" %>>New</option>
+                <option value="Like New" <%= "Like New".equals(request.getParameter("condition")) ? "selected" : "" %>>Like New</option>
+                <option value="Used" <%= "Used".equals(request.getParameter("condition")) ? "selected" : "" %>>Used</option>
+            </select>
 
             <!-- Price Filter -->
             <input type="number" name="minPrice" placeholder="Min Price"
@@ -68,6 +95,7 @@
                     <%= "name_desc".equals(request.getParameter("sort")) ? "selected" : "" %>>
                     Name: Z to A
                 </option>
+
             </select>
 
             <!-- Buttons -->
@@ -92,17 +120,48 @@
 
         <div class="card-body">
             <div class="title"><%= p.getTitle() %></div>
+            <% if(p.getCategory() != null && !p.getCategory().trim().isEmpty()) { %>
+                <div class="category-badge"><span><%= p.getCategory().substring(0, 1) %></span><%= p.getCategory() %></div>
+            <% } %>
+            <% if(p.isSold()) { %>
+                <div class="sold-badge">Sold</div>
+            <% } %>
             <div class="price">₹ <%= p.getPrice() %></div>
             <div class="desc"><%= p.getDescription() %></div>
+            <div class="product-info">
+                <% if(p.getProductCondition() != null) { %>
+                    <span>Condition: <%= p.getProductCondition() %></span>
+                <% } %>
+                <% if(p.getCampusLocation() != null) { %>
+                    <span>Location: <%= p.getCampusLocation() %></span>
+                <% } %>
+            </div>
+            <% if(p.isSaved()) { %>
+                <a class="btn saved-btn" href="RemoveWishlistServlet?id=<%= p.getId() %>">Saved</a>
+            <% } else { %>
+                <a class="btn save-btn" href="SaveProductServlet?id=<%= p.getId() %>">Save Product</a>
+            <% } %>
 
-            <details class="contact-owner">
-                <summary class="btn contact-btn">Contact Owner</summary>
-                <div class="contact-details">
-                    <p><strong>Name:</strong> <%= p.getOwnerName() %></p>
-                    <p><strong>Email:</strong> <%= p.getOwnerEmail() %></p>
-                    <p><strong>Phone:</strong> <%= p.getContactNumber() %></p>
-                </div>
-            </details>
+            <% if(!p.isSold()) { %>
+                <details class="contact-owner">
+                    <summary class="btn contact-btn">Contact Owner</summary>
+                    <% if(isLoggedIn) { %>
+                        <div class="contact-details">
+                            <p><strong>Name:</strong> <%= p.getOwnerName() %></p>
+                            <p><strong>Email:</strong> <%= p.getOwnerEmail() %></p>
+                            <p><strong>Phone:</strong> <%= p.getContactNumber() %></p>
+                        </div>
+                    <% } else { %>
+                        <div class="contact-details contact-warning">
+                            <p><strong>Login required:</strong> Please login or register to view seller contact details.</p>
+                            <div class="contact-actions">
+                                <a href="login.jsp">Login</a>
+                                <a href="register.jsp">Register</a>
+                            </div>
+                        </div>
+                    <% } %>
+                </details>
+            <% } %>
         </div>
     </div>
 
@@ -122,5 +181,6 @@
 </div>
 </div>
 
+<script src="assets/js/ui.js"></script>
 </body>
 </html>
