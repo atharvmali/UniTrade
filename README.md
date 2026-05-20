@@ -1,88 +1,144 @@
-# UniTrade
+# 🏪 UniTrade - Campus Marketplace Platform
 
-UniTrade is a Java JSP/Servlet campus marketplace backed by MySQL. Students can register, log in, list items, browse listings, save products to a wishlist, and manage their own products. Admin users can review users, products, and recent activity from a protected dashboard.
+UniTrade is a modern **Java JSP/Servlet-based campus marketplace** where students can buy, sell, and trade items within their university community. Built with Jakarta Servlet API, MySQL, and deployed on Apache Tomcat, it provides a seamless peer-to-peer trading experience with an intuitive interface and robust admin controls.
 
-## Table of Contents
+---
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Usage Guide](#-usage-guide)
-- [Architecture](#-architecture)
-- [Database Schema](#-database-schema)
-- [Servlet API Documentation](#-servlet-api-documentation)
-- [Project Structure](#-project-structure)
-- [Configuration](#-configuration)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [License](#-license)
+## 📋 Table of Contents
 
-## Overview
+- [🌟 Overview](#-overview)
+- [✨ Features](#-features)
+- [🛠️ Tech Stack](#-tech-stack)
+- [📸 Screenshots](#-screenshots)
+- [📦 Installation](#-installation)
+- [🚀 Quick Start](#-quick-start)
+- [📖 Usage Guide](#-usage-guide)
+- [🏗️ Architecture](#-architecture)
+- [🗄️ Database Schema](#-database-schema)
+- [🔌 Servlet API Documentation](#-servlet-api-documentation)
+- [📁 Project Structure](#-project-structure)
+- [⚙️ Configuration](#-configuration)
+- [🔧 Troubleshooting](#-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
 
-The application is organized around a small set of JSP pages and servlet endpoints. The current implementation focuses on marketplace basics rather than a large framework stack: authentication, product management, search, wishlist, and admin reporting.
+---
 
-## Features
+## 🌟 Overview
 
-### Authentication and access control
-- User registration and login
-- Session-based authentication
-- Logout
-- Admin role support through `users.is_admin`
+UniTrade simplifies campus commerce by connecting students in a secure, community-focused marketplace. Whether you're selling textbooks, furniture, or electronics, or looking for a great deal on campus essentials, UniTrade makes it easy to find what you need.
 
-### Product management
-- Add products with title, description, price, image, contact number, condition, category, and campus location
-- View all products
-- Edit and delete personal listings
-- Mark listings as sold
+**Key Statistics:**
+- 📊 19 servlet endpoints for robust backend operations
+- 🗄️ 3 main data models (Users, Products, Wishlist)
+- 🎨 12+ responsive JSP pages for intuitive UI
+- ⚡ Fast search & filtering across thousands of listings
 
-### Search and browsing
-- Keyword search across title, category, and campus location
-- Category filtering
-- Condition filtering
-- Minimum and maximum price filtering
-- Sorting by price or title
+---
 
-### Wishlist
-- Save a product to a wishlist
-- Remove a product from the wishlist
-- View saved products in a separate page
+## ✨ Features
 
-### Admin dashboard
-- View total users and total products
-- Inspect recent products and recent users
-- Manage users and products from admin pages
+### 🔐 Authentication & Access Control
+- **User Registration:** Email-based signup with password validation
+- **Secure Login:** Session-based authentication with encrypted credentials
+- **Admin Roles:** Dedicated admin panel with elevated privileges
+- **Logout:** Secure session termination
 
-## Tech Stack
+### 📦 Product Management
+- **Create Listings:** Add products with:
+  - Title, description, and detailed specifications
+  - Price and condition (New, Like New, Good, Fair)
+  - Product category and campus location
+  - Contact information
+  - Product images
+- **Edit & Delete:** Manage your own listings
+- **Mark as Sold:** Quick status updates for sold items
+- **View All Products:** Browse entire catalog with pagination
 
-| Category | Technology |
-|----------|-----------|
-| **Backend** | Java, Jakarta Servlet API (JSP/Servlet) |
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Database** | MySQL 8.0+ |
-| **Server** | Apache Tomcat 10+ |
-| **JDBC Driver** | MySQL Connector/J 9.4.0 |
-| **IDE** | Eclipse, IntelliJ IDEA |
-| **Java Version** | Java 11+ |
+### 🔍 Advanced Search & Filtering
+- **Keyword Search:** Search across product titles and descriptions
+- **Category Filtering:** Browse by product category
+- **Condition Filtering:** Filter by item condition
+- **Price Range:** Set minimum and maximum price filters
+- **Campus Location:** Find items near you
+- **Smart Sorting:** Order by price or title
 
-## Installation
+### ❤️ Wishlist Management
+- **Save Products:** Add items to personalized wishlist
+- **Quick Access:** View all saved products on dedicated page
+- **Remove Items:** Manage wishlist with one click
+- **Save for Later:** Keep track of interested items
+
+### 👨‍💼 Admin Dashboard
+- **Analytics Overview:** Total users and products at a glance
+- **Recent Activity:** Monitor recent users and product listings
+- **User Management:** Review, inspect, and manage user accounts
+- **Product Management:** Review, inspect, and manage product listings
+- **Admin Controls:** Delete problematic users or listings
+
+---
+
+## 📸 Screenshots
+
+### Landing Page
+![Index Page](assets/screenShots/index.png)
+
+### User Registration
+![Register Page](assets/screenShots/register.png)
+
+### User Login
+![Login Page](assets/screenShots/login.png)
+
+### Home Dashboard
+![Home Page](assets/screenShots/home.png)
+
+### Browse Products
+![View Products](assets/screenShots/viewProducts.png)
+
+### Add New Product
+![Add Product](assets/screenShots/addProduct.png)
+
+### Edit Product
+![Edit Product](assets/screenShots/editProduct.png)
+
+### My Products (User Listings)
+![My Products](assets/screenShots/myProducts.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology | Version |
+|----------|-----------|---------|
+| **Backend** | Java, Jakarta Servlet API | Java 11+ |
+| **Presentation** | JSP (JavaServer Pages) | 3.0+ |
+| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) | ES6+ |
+| **Database** | MySQL | 8.0+ |
+| **JDBC Driver** | MySQL Connector/J | 9.4.0 |
+| **Application Server** | Apache Tomcat | 10.0+ |
+| **IDE** | Eclipse IDE / IntelliJ IDEA | Latest |
+| **Build Tool** | Maven | 3.6+ |
+| **Protocol** | HTTP/HTTPS | HTTP/1.1 |
+
+---
+
+## 📦 Installation
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+Ensure you have the following installed on your system:
 
 ```bash
-# Check Java version
+# Java Version Check
 java -version
 # Required: Java 11 or higher
 
-# Check MySQL version
+# MySQL Version Check
 mysql --version
 # Required: MySQL 8.0 or higher
 
-# Apache Tomcat 10.0 or higher
-# Download from: https://tomcat.apache.org/
+# Download Apache Tomcat 10.0+
+# From: https://tomcat.apache.org/download-10.cgi
 ```
 
 ### Step 1: Clone/Download Project
@@ -92,144 +148,117 @@ mysql --version
 cd ~/projects
 
 # Clone the repository (if using git)
-git clone <repository-url> UniTrade
+git clone https://github.com/yourusername/UniTrade.git
 cd UniTrade
 ```
 
 ### Step 2: Set Up MySQL Database
 
-```bash
-# Connect to MySQL
-mysql -u root -p
-
-# Execute the following SQL commands:
-```
+#### Create Database and Tables
 
 ```sql
+-- Connect to MySQL
+mysql -u root -p
+
 -- Create database
 CREATE DATABASE IF NOT EXISTS unitrade;
 USE unitrade;
 
 -- Create users table
-CREATE TABLE IF NOT EXISTS users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(15),
     is_admin BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create products table
-CREATE TABLE IF NOT EXISTS products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
-    description TEXT NOT NULL,
-    price DOUBLE NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2),
     image VARCHAR(255),
-    seller_id INT NOT NULL,
-    contact_number VARCHAR(20),
-    sold BOOLEAN DEFAULT FALSE,
-    product_condition VARCHAR(50),
+    contact_number VARCHAR(15),
+    condition VARCHAR(50),
     category VARCHAR(100),
-    campus_location VARCHAR(150),
+    campus_location VARCHAR(100),
+    sold BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_seller (seller_id),
-    INDEX idx_sold (sold),
-    INDEX idx_category (category)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Create wishlist table
-CREATE TABLE IF NOT EXISTS wishlist (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     product_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY unique_wishlist (user_id, product_id),
+    saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    UNIQUE(user_id, product_id)
 );
 
--- Insert sample admin user
-INSERT INTO users (name, email, password, is_admin)
-VALUES ('Admin User', 'admin@unitrade.com', 'admin123', TRUE);
+-- Create indexes for performance
+CREATE INDEX idx_user_email ON users(email);
+CREATE INDEX idx_product_user ON products(user_id);
+CREATE INDEX idx_wishlist_user ON wishlist(user_id);
+CREATE INDEX idx_wishlist_product ON wishlist(product_id);
 ```
 
-### Step 3: Update Database Connection
+### Step 3: Configure Database Connection
 
-**File:** `src/main/java/dao/DBConnection.java`
+Edit `src/main/java/dao/DBConnection.java`:
 
 ```java
 public static Connection getConnection() {
+    Connection con = null;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(
+        con = DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/unitrade",
-            "root",              // ← Change if your MySQL username differs
-            "mysqlroot"          // ← Change to your MySQL password
+            "root",                // Change to your MySQL username
+            "mysqlroot"            // Change to your MySQL password
         );
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return null;
+    return con;
 }
 ```
 
-### Step 4: Configure Tomcat
+### Step 4: Deploy to Apache Tomcat
 
-1. **Download & Extract Tomcat**
-   ```bash
-   # macOS/Linux
-   cd /opt
-   wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.70/bin/apache-tomcat-9.0.70.tar.gz
-   tar -xzf apache-tomcat-9.0.70.tar.gz
-   
-   # Windows: Download from https://tomcat.apache.org/
-   ```
-
-2. **Configure Server Port** (Optional)
-   ```bash
-   # Edit: {TOMCAT_HOME}/conf/server.xml
-   # Find line: <Connector port="8080"...
-   # Default port is 8080
-   ```
-
-### Step 5: Deploy Application
-
-#### Option A: IDE Deployment (Recommended)
-
-**Using Eclipse:**
-1. Right-click project → Properties
-2. Project Facets → Convert to faceted form
-3. Right-click project → Run As → Run on Server
-4. Select Tomcat Server → Finish
-
-**Using IntelliJ IDEA:**
-1. Run → Edit Configurations
-2. Add New Configuration → Tomcat Server
-3. Set Application Server → Configure Tomcat
-4. Select UniTrade as deployment artifact
-5. Click Run
-
-#### Option B: Manual WAR Deployment
+#### Option A: Using Maven
 
 ```bash
-# Build WAR file from your IDE, then:
+# Build the project
+mvn clean install
 
-# Copy to Tomcat
-cp UniTrade.war /path/to/tomcat/webapps/
+# Copy WAR file to Tomcat
+cp target/UniTrade.war $CATALINA_HOME/webapps/
 
 # Start Tomcat
-cd /path/to/tomcat/bin
-./catalina.sh start  # macOS/Linux
-# or: catalina.bat start (Windows)
-
-# View logs
-tail -f /path/to/tomcat/logs/catalina.out
+$CATALINA_HOME/bin/startup.sh
 ```
 
-### Step 6: Access Application
+#### Option B: Using Eclipse IDE
+
+1. Right-click project → **Run As** → **Run on Server**
+2. Select Apache Tomcat 10.0
+3. Click **Finish**
+
+#### Option C: Manual Deployment
+
+1. Build the project (generate WAR file)
+2. Copy WAR to `$CATALINA_HOME/webapps/`
+3. Start Tomcat: `$CATALINA_HOME/bin/startup.sh`
+
+### Step 5: Access the Application
 
 ```
 http://localhost:8080/UniTrade
@@ -237,254 +266,243 @@ http://localhost:8080/UniTrade
 
 ---
 
-## 🎯 Quick Start
+## 🚀 Quick Start
 
-### First-Time Login
+### For Users
 
-1. **Visit Home Page:** `http://localhost:8080/UniTrade`
-2. **Click "Login"**
-3. **Enter Credentials:**
-   - Email: `admin@unitrade.com`
-   - Password: `admin123`
-4. **Explore Dashboard!**
+1. **Register an Account**
+   - Navigate to the registration page
+   - Enter your name, email, and password
+   - Verify your credentials
+   - Log in with your account
 
-### Register New Account
+2. **Add Your First Product**
+   - Click "Add Product" from the home page
+   - Fill in product details (title, price, condition, etc.)
+   - Upload product image
+   - Click "Post Listing"
 
-1. Click **"Register"** on login page
-2. Enter: Name, Email, Password
-3. Click **"Register"**
-4. You'll be redirected to login
-5. Login with your new credentials
+3. **Browse & Search**
+   - Use the search bar to find items
+   - Apply filters (price, condition, location)
+   - Click on product to view details and contact seller
 
-### Add Your First Product
+4. **Manage Wishlist**
+   - Save interesting products to your wishlist
+   - View all saved items in one place
+   - Remove items as needed
 
-1. After login, click **"Add Product"**
-2. Fill in the form:
-   - **Title:** Product name
-   - **Description:** Detailed description
-   - **Price:** In your local currency
-   - **Category:** Select from dropdown
-   - **Condition:** New/Like New/Good/Fair
-   - **Campus Location:** Where item is located
-   - **Contact Number:** Your phone number
-   - **Image:** Upload product photo
-3. Click **"Add Product"**
-4. View your listing in **"My Products"**
+### For Admins
+
+1. **Access Admin Dashboard**
+   - Log in with admin account
+   - Navigate to Admin Dashboard
+   - View key statistics and recent activity
+
+2. **Manage Users**
+   - View all registered users
+   - Inspect user profiles
+   - Delete suspicious accounts if needed
+
+3. **Manage Products**
+   - View all product listings
+   - Inspect product details
+   - Remove inappropriate listings
 
 ---
 
-## 📚 Usage Guide
+## 📖 Usage Guide
 
-### For Sellers
+### Authentication Flow
 
-#### Listing a Product
 ```
-Home → Add Product → Fill Details → Upload Image → Submit
-```
-
-**Product Information Required:**
-- Title (max 200 chars)
-- Description (detailed info helps sales)
-- Price
-- Product Condition
-- Category
-- Campus Location
-- Contact Number
-- Product Image
-
-#### Managing Your Listings
-```
-Home → My Products → [View/Edit/Delete/Mark Sold]
+User Registration
+       ↓
+RegisterServlet validates input
+       ↓
+Credentials stored in MySQL
+       ↓
+       ↓
+User Login
+       ↓
+LoginServlet validates credentials
+       ↓
+Session created (session ID stored)
+       ↓
+Redirect to Home Page
 ```
 
-**Actions Available:**
-- ✏️ **Edit** - Update product details
-- 🗑️ **Delete** - Remove listing
-- ✔️ **Mark Sold** - Update availability
-- 👁️ **View** - See product details
+### Product Listing Flow
 
-### For Buyers
-
-#### Browsing Products
 ```
-Home → All Products
+User adds product
+       ↓
+AddProductServlet → SaveProductServlet
+       ↓
+Image uploaded & validated
+       ↓
+Product data inserted into MySQL
+       ↓
+Redirect to MyProducts page
 ```
 
-**Features:**
-- Search by keyword
-- Filter by category
-- Filter by condition
-- Sort by price or name
-- View seller details
+### Search & Filtering Flow
 
-#### Saving Favorites
-1. Click **"♥ Save"** button on product
-2. Saved items appear in **"Wishlist"**
-3. Click **"Remove"** to delete from wishlist
+```
+User performs search
+       ↓
+SearchServlet receives query parameters
+       ↓
+Filters applied (category, price, condition, location)
+       ↓
+Database query executed
+       ↓
+Results displayed with pagination
+```
 
-#### Contacting Sellers
-- View seller name, email, phone
-- Click to call or email
-- Connect on campus
+### Wishlist Flow
 
-#### Search Tips
-- Use specific keywords
-- Filter by location for nearby items
-- Sort by price to find deals
-- Check condition for quality
+```
+User saves product
+       ↓
+SaveProductServlet adds to wishlist table
+       ↓
+WishlistServlet retrieves all saved items
+       ↓
+Wishlist page displays with options to remove
+```
 
 ---
 
 ## 🏗️ Architecture
 
-### High-Level Architecture
+### Model-View-Controller Pattern
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Browser/Client                        │
-│            (HTML, CSS, JavaScript, JSP)                  │
-└────────────────────┬────────────────────────────────────┘
-                     │ HTTP/HTTPS
-┌────────────────────▼────────────────────────────────────┐
-│              Apache Tomcat Server                        │
-│         (Servlet Container, JSP Engine)                  │
-├─────────────────────────────────────────────────────────┤
-│                  Servlet Layer                           │
-│  [LoginServlet][AddProductServlet][SearchServlet]...    │
-├─────────────────────────────────────────────────────────┤
-│                  Business Logic                          │
-│     [DAO] [Model] [Utility] [Service Classes]           │
-├─────────────────────────────────────────────────────────┤
-│              Database Layer (JDBC)                       │
-│        [PreparedStatement] [Connection Pool]            │
-└────────────────────┬────────────────────────────────────┘
-                     │ JDBC
-┌────────────────────▼────────────────────────────────────┐
-│              MySQL Database                              │
-│     [users] [products] [wishlist] [tables]              │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                                                         │
+│                    JSP Pages (Views)                    │
+│        (index, login, register, home, etc.)            │
+│                                                         │
+└────────────────┬────────────────────────────────────┘
+                 │
+         HTTP Request/Response
+                 │
+┌────────────────▼────────────────────────────────────┐
+│                                                         │
+│          Servlet Controllers (19 Servlets)            │
+│    (LoginServlet, AddProductServlet, etc.)            │
+│                                                         │
+└────────────────┬────────────────────────────────────┘
+                 │
+            Business Logic
+                 │
+┌────────────────▼────────────────────────────────────┐
+│                                                         │
+│          Model Classes (Data Objects)                  │
+│          (Product, User objects)                       │
+│                                                         │
+└────────────────┬────────────────────────────────────┘
+                 │
+           JDBC Layer
+                 │
+┌────────────────▼────────────────────────────────────┐
+│                                                         │
+│          MySQL Database                                │
+│   (users, products, wishlist tables)                  │
+│                                                         │
+└─────────────────────────────────────────────────────┘
 ```
 
-### Layers Explained
+### Component Interaction Diagram
 
-| Layer | Components | Responsibility |
-|-------|-----------|---|
-| **Presentation** | JSP files, HTML, CSS, JS | User Interface |
-| **Servlet Layer** | 19+ Servlets | Request handling, routing |
-| **Business Logic** | Model, DAO, Utility | Data processing |
-| **Data Access** | DBConnection, JDBC | Database queries |
-| **Database** | MySQL tables | Data persistence |
+```
+┌──────────────┐
+│  User/Admin  │
+└──────┬───────┘
+       │ HTTP
+       ▼
+┌──────────────────┐
+│  Web Browser     │
+└──────┬───────────┘
+       │
+       ▼
+┌──────────────────────────────┐
+│   Apache Tomcat Server       │
+├──────────────────────────────┤
+│ ┌────────────────────────┐   │
+│ │  JSP Pages (View)      │   │
+│ ├────────────────────────┤   │
+│ │  19 Servlet Classes    │   │
+│ │  (Controller Layer)    │   │
+│ ├────────────────────────┤   │
+│ │  Model Classes         │   │
+│ │  (Business Logic)      │   │
+│ └────────────────────────┘   │
+└──────────────┬────────────────┘
+               │ JDBC
+               ▼
+        ┌──────────────┐
+        │   MySQL DB   │
+        └──────────────┘
+```
 
 ---
 
-## 📊 Database Schema
+## 🗄️ Database Schema
 
-### Entity-Relationship Diagram
-
-```
-┌─────────────────┐          ┌──────────────────┐
-│     USERS       │ 1     ∞  │    PRODUCTS      │
-├─────────────────┤◄─────────┤──────────────────┤
-│ id (PK)         │          │ id (PK)          │
-│ name            │          │ title            │
-│ email (UNIQUE)  │          │ description      │
-│ password        │          │ price            │
-│ created_at      │          │ image            │
-└─────────────────┘          │ seller_id (FK)   │
-                             │ contact_number   │
-                             │ sold             │
-                             │ product_condition│
-                             │ category         │
-                             │ campus_location  │
-                             │ created_at       │
-                             └────────┬─────────┘
-                                      │ M:M
-                             ┌────────▼─────────┐
-                             │    WISHLIST      │
-                             ├──────────────────┤
-                             │ id (PK)          │
-                             │ user_id (FK)     │
-                             │ product_id (FK)  │
-                             │ created_at       │
-                             └──────────────────┘
-```
-
-### Table Definitions
-
-#### Users Table
+### Users Table
 ```sql
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL,
-  is_admin BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+┌─────────────────────────────────────┐
+│ users                               │
+├─────────────────────────────────────┤
+│ id (PK)              INT             │
+│ name                 VARCHAR(100)    │
+│ email (UNIQUE)       VARCHAR(100)    │
+│ password             VARCHAR(255)    │
+│ phone                VARCHAR(15)     │
+│ is_admin             BOOLEAN         │
+│ created_at           TIMESTAMP       │
+└─────────────────────────────────────┘
 ```
 
-**Columns:**
-- `id`: Unique user identifier
-- `name`: Full name of user
-- `email`: Email address (unique)
-- `password`: Stored password value
-- `is_admin`: Admin flag used by `AdminUtility`
-- `created_at`: Registration timestamp
-
-#### Products Table
+### Products Table
 ```sql
-CREATE TABLE products (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(200) NOT NULL,
-    description TEXT NOT NULL,
-    price DOUBLE NOT NULL,
-    image VARCHAR(255),
-    seller_id INT NOT NULL,
-    contact_number VARCHAR(20),
-    sold BOOLEAN DEFAULT FALSE,
-    product_condition VARCHAR(50),
-    category VARCHAR(100),
-    campus_location VARCHAR(150),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_seller (seller_id),
-    INDEX idx_sold (sold),
-    INDEX idx_category (category)
-);
+┌────────────────────────────────────────┐
+│ products                               │
+├────────────────────────────────────────┤
+│ id (PK)              INT               │
+│ user_id (FK)         INT               │
+│ title                VARCHAR(200)      │
+│ description          TEXT              │
+│ price                DECIMAL(10, 2)    │
+│ image                VARCHAR(255)      │
+│ contact_number       VARCHAR(15)       │
+│ condition            VARCHAR(50)       │
+│ category             VARCHAR(100)      │
+│ campus_location      VARCHAR(100)      │
+│ sold                 BOOLEAN           │
+│ created_at           TIMESTAMP         │
+└────────────────────────────────────────┘
 ```
 
-**Columns:**
-- `id`: Product ID
-- `title`: Product name
-- `description`: Detailed description
-- `price`: Selling price
-- `image`: Image file path
-- `seller_id`: Reference to seller
-- `contact_number`: Seller's phone
-- `sold`: Availability status
-- `product_condition`: Quality level
-- `category`: Product category
-- `campus_location`: Where item is
-- `created_at`: Listing timestamp
-
-#### Wishlist Table
+### Wishlist Table
 ```sql
-CREATE TABLE wishlist (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY unique_wishlist (user_id, product_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-);
+┌──────────────────────────────────────┐
+│ wishlist                             │
+├──────────────────────────────────────┤
+│ id (PK)              INT              │
+│ user_id (FK)         INT              │
+│ product_id (FK)      INT              │
+│ saved_at             TIMESTAMP        │
+│ UNIQUE(user_id, product_id)          │
+└──────────────────────────────────────┘
 ```
 
-**Columns:**
-- `id`: Wishlist entry ID
-- `user_id`: Reference to user
-- `product_id`: Reference to product
-- `created_at`: When saved
+### Relationships
+- Users → Products (1:N)
+- Users → Wishlist (1:N)
+- Products → Wishlist (1:N)
 
 ---
 
@@ -493,243 +511,144 @@ CREATE TABLE wishlist (
 ### Authentication Servlets
 
 #### LoginServlet
-```
-URL: /LoginServlet
-Method: POST
-Parameters:
-  - email (String)
-  - password (String)
-Response:
-  - Success: Redirect to home.jsp
-  - Failure: Redirect to login.jsp?error=1
-Session Attributes Set:
-  - user: User email
-  - role: `admin` or `user`
-```
+- **Path:** `/login`
+- **Method:** POST
+- **Parameters:** email, password
+- **Response:** Redirect to home or back to login with error
+- **Session:** Creates session with user_id
 
 #### RegisterServlet
-```
-URL: /RegisterServlet
-Method: POST
-Parameters:
-  - name (String)
-  - email (String)
-  - password (String)
-Response:
-  - Success: Redirect to login.jsp
-  - Failure: Redirect to register.jsp?error=1
-Validation:
-  - Email must be unique
-  - All fields required
-```
+- **Path:** `/register`
+- **Method:** POST
+- **Parameters:** name, email, password, confirmPassword
+- **Validation:** Email uniqueness, password confirmation
+- **Response:** Redirect to login or back to register with error
 
 #### LogoutServlet
-```
-URL: /LogoutServlet
-Method: GET/POST
-Response: Invalidate session → Redirect to index.jsp
-```
+- **Path:** `/logout`
+- **Method:** GET
+- **Response:** Clears session, redirects to index
 
-### Product Management Servlets
+### Product Servlets
 
 #### AddProductServlet
-```
-URL: /AddProductServlet
-Method: POST
-Parameters:
-  - title (String)
-  - description (String)
-  - price (Double)
-  - contactNumber (String)
-  - productCondition (String)
-  - category (String)
-  - campusLocation (String)
-  - image (File)
-Security: Requires login
-Features:
-  - Dual file storage (local + web)
-  - Auto timestamp filename
-Response: Redirect to home.jsp
-```
+- **Path:** `/addProduct`
+- **Method:** GET
+- **Response:** Displays add product form
+- **Authentication:** Required
 
-#### EditProductServlet
-```
-URL: /EditProductServlet
-Method: POST
-Parameters:
-  - productId (Integer)
-  - title, description, price, etc.
-Security: Seller ownership verified
-Response: Redirect to myProducts.jsp
-```
-
-#### DeleteProductServlet
-```
-URL: /DeleteProductServlet
-Method: GET/POST
-Parameters:
-  - productId (Integer)
-Security: Seller ownership verified
-Response: Redirect to myProducts.jsp
-```
-
-#### UpdateProductServlet
-```
-URL: /UpdateProductServlet
-Method: POST
-Purpose: Update product details
-Parameters: Same as EditProductServlet
-```
-
-#### MarkSoldServlet
-```
-URL: /MarkSoldServlet
-Method: GET/POST
-Parameters:
-  - productId (Integer)
-Security: Seller ownership verified
-Action: Sets sold = TRUE
-Response: Redirect to myProducts.jsp
-```
-
-### Product Browsing Servlets
+#### SaveProductServlet
+- **Path:** `/saveProduct`
+- **Method:** POST
+- **Parameters:** title, description, price, image, contactNumber, condition, category, campusLocation
+- **Response:** Redirect to myProducts or back to form with error
+- **File Upload:** Handles image upload
 
 #### ViewProductsServlet
-```
-URL: /ViewProductsServlet
-Method: GET
-Parameters (Optional):
-  - keyword (String)
-  - minPrice (Double)
-  - maxPrice (Double)
-  - category (String)
-  - condition (String)
-  - sort (String): "price_asc", "price_desc", "name_asc", "name_desc"
-Response: Forward to viewProducts.jsp
-Attributes:
-  - products (List<Product>)
-Features:
-  - Advanced filtering
-  - Multi-parameter sorting
-  - Logged-in user sees seller info
-```
-
-#### SearchServlet
-```
-URL: /SearchServlet
-Method: GET
-Parameters:
-  - keyword (String)
-Search Fields:
-  - title
-  - category
-  - campus_location
-Response: Forward to viewProducts.jsp
-Attributes:
-  - products (List<Product>)
-```
+- **Path:** `/viewProducts`
+- **Method:** GET
+- **Parameters:** (optional) search, category, condition, minPrice, maxPrice, sort
+- **Response:** Displays all products with filters and search
+- **Pagination:** Supports pagination
 
 #### MyProductsServlet
-```
-URL: /MyProductsServlet
-Method: GET
-Security: Requires login
-Response: Forward to myProducts.jsp
-Attributes:
-  - products (List<Product>) - User's listings only
-```
+- **Path:** `/myProducts`
+- **Method:** GET
+- **Response:** Displays user's own products
+- **Authentication:** Required
+
+#### EditProductServlet
+- **Path:** `/editProduct`
+- **Method:** GET
+- **Parameters:** id
+- **Response:** Displays edit form with current product data
+- **Authentication:** Required (owner only)
+
+#### UpdateProductServlet
+- **Path:** `/updateProduct`
+- **Method:** POST
+- **Parameters:** id, title, description, price, image, contactNumber, condition, category, campusLocation
+- **Response:** Redirect to myProducts or back to form with error
+- **Authentication:** Required (owner only)
+
+#### DeleteProductServlet
+- **Path:** `/deleteProduct`
+- **Method:** POST
+- **Parameters:** id
+- **Response:** Redirect to myProducts
+- **Authentication:** Required (owner only)
+
+#### MarkSoldServlet
+- **Path:** `/markSold`
+- **Method:** POST
+- **Parameters:** id
+- **Response:** Redirect to myProducts
+- **Authentication:** Required (owner only)
+
+### Search Servlets
+
+#### SearchServlet
+- **Path:** `/search`
+- **Method:** GET
+- **Parameters:** q (query), category, condition, minPrice, maxPrice, sort, campus
+- **Response:** Displays search results with filters
+- **Features:** Full-text search, multiple filters
 
 ### Wishlist Servlets
 
 #### WishlistServlet
-```
-URL: /WishlistServlet
-Method: GET
-Security: Requires login
-Response: Forward to wishlist.jsp
-Attributes:
-  - products (List<Product>) - Saved items
-```
+- **Path:** `/wishlist`
+- **Method:** GET
+- **Response:** Displays user's wishlist items
+- **Authentication:** Required
 
-#### SaveProductServlet
-```
-URL: /SaveProductServlet
-Method: GET/POST
-Parameters:
-  - productId (Integer)
-Security: Requires login
-Action: Add product to wishlist
-Response: Redirect to referrer
-```
+#### SaveProductServlet (Wishlist Add)
+- **Path:** `/saveProduct`
+- **Method:** GET
+- **Parameters:** productId
+- **Response:** Adds product to wishlist, redirects back
+- **Authentication:** Required
 
 #### RemoveWishlistServlet
-```
-URL: /RemoveWishlistServlet
-Method: GET/POST
-Parameters:
-  - productId (Integer)
-Security: Requires login
-Action: Remove from wishlist
-Response: Redirect to wishlist.jsp
-```
+- **Path:** `/removeWishlist`
+- **Method:** POST
+- **Parameters:** productId
+- **Response:** Removes from wishlist, redirects to wishlist page
+- **Authentication:** Required
 
 ### Admin Servlets
 
 #### AdminDashboardServlet
-```
-URL: /AdminDashboardServlet
-Method: GET
-Security: Requires login
-Authorization: Checks AdminUtility.isAdmin()
-Response: Forward to adminDashboard.jsp
-Attributes:
-  - totalUsers (Integer)
-  - totalProducts (Integer)
-  - recentProducts (List<Product>) - Last 5
-  - recentUsers (List<String[]>) - Last 5
-```
+- **Path:** `/adminDashboard`
+- **Method:** GET
+- **Response:** Displays admin dashboard with statistics
+- **Authentication:** Required (admin only)
 
 #### AdminUsersServlet
-```
-URL: /AdminUsersServlet
-Method: GET
-Security: Admin only
-Response: Forward to adminUsers.jsp
-Attributes:
-  - users (List<User>)
-```
+- **Path:** `/adminUsers`
+- **Method:** GET
+- **Response:** Displays all users table
+- **Authentication:** Required (admin only)
 
 #### AdminProductsServlet
-```
-URL: /AdminProductsServlet
-Method: GET
-Security: Admin only
-Response: Forward to adminProducts.jsp
-Attributes:
-  - products (List<Product>)
-```
+- **Path:** `/adminProducts`
+- **Method:** GET
+- **Response:** Displays all products table
+- **Authentication:** Required (admin only)
 
 #### AdminDeleteUserServlet
-```
-URL: /AdminDeleteUserServlet
-Method: GET/POST
-Parameters:
-  - userId (Integer)
-Security: Admin only
-Action: Delete user and cascade delete products/wishlist
-Response: Redirect to adminUsers.jsp
-```
+- **Path:** `/adminDeleteUser`
+- **Method:** POST
+- **Parameters:** userId
+- **Response:** Deletes user and their products
+- **Authentication:** Required (admin only)
 
 #### AdminDeleteProductServlet
-```
-URL: /AdminDeleteProductServlet
-Method: GET/POST
-Parameters:
-  - productId (Integer)
-Security: Admin only
-Action: Delete product and remove from wishlists
-Response: Redirect to adminProducts.jsp
-```
+- **Path:** `/adminDeleteProduct`
+- **Method:** POST
+- **Parameters:** productId
+- **Response:** Deletes product from system
+- **Authentication:** Required (admin only)
 
 ---
 
@@ -737,48 +656,98 @@ Response: Redirect to adminProducts.jsp
 
 ```
 UniTrade/
-├── src/main/java/
-│   ├── dao/DBConnection.java
-│   ├── model/Product.java
-│   ├── servlet/
-│   │   ├── LoginServlet.java
-│   │   ├── RegisterServlet.java
-│   │   ├── LogoutServlet.java
-│   │   ├── AddProductServlet.java
-│   │   ├── ViewProductsServlet.java
-│   │   ├── SearchServlet.java
-│   │   ├── MyProductsServlet.java
-│   │   ├── WishlistServlet.java
-│   │   ├── SaveProductServlet.java
-│   │   ├── RemoveWishlistServlet.java
-│   │   ├── MarkSoldServlet.java
-│   │   ├── AdminDashboardServlet.java
-│   │   ├── AdminUsersServlet.java
-│   │   ├── AdminProductsServlet.java
-│   │   ├── AdminDeleteUserServlet.java
-│   │   └── AdminDeleteProductServlet.java
-│   └── util/AdminUtility.java
-└── src/main/webapp/
-  ├── index.jsp
-  ├── login.jsp
-  ├── register.jsp
-  ├── home.jsp
-  ├── addProduct.jsp
-  ├── editProduct.jsp
-  ├── viewProducts.jsp
-  ├── myProducts.jsp
-  ├── wishlist.jsp
-  ├── adminDashboard.jsp
-  ├── adminUsers.jsp
-  ├── adminProducts.jsp
-  └── assets/
-    ├── css/theme.css
-    └── js/ui.js
+├── README.md                          # Project documentation
+├── pom.xml                            # Maven configuration
+├── assets/
+│   └── screenShots/                   # Application screenshots
+│       ├── index.png
+│       ├── login.png
+│       ├── register.png
+│       ├── home.png
+│       ├── viewProducts.png
+│       ├── addProduct.png
+│       ├── editProduct.png
+│       └── myProducts.png
+└── UniTrade/
+    └── src/
+        └── main/
+            ├── java/
+            │   ├── dao/
+            │   │   └── DBConnection.java              # Database connection pool
+            │   ├── model/
+            │   │   └── Product.java                   # Product data model
+            │   ├── servlet/
+            │   │   ├── AddProductServlet.java
+            │   │   ├── AdminDashboardServlet.java
+            │   │   ├── AdminDeleteProductServlet.java
+            │   │   ├── AdminDeleteUserServlet.java
+            │   │   ├── AdminProductsServlet.java
+            │   │   ├── AdminUsersServlet.java
+            │   │   ├── DeleteProductServlet.java
+            │   │   ├── EditProductServlet.java
+            │   │   ├── LoginServlet.java
+            │   │   ├── LogoutServlet.java
+            │   │   ├── MarkSoldServlet.java
+            │   │   ├── MyProductsServlet.java
+            │   │   ├── RegisterServlet.java
+            │   │   ├── RemoveWishlistServlet.java
+            │   │   ├── SaveProductServlet.java
+            │   │   ├── SearchServlet.java
+            │   │   ├── UpdateProductServlet.java
+            │   │   ├── ViewProductsServlet.java
+            │   │   └── WishlistServlet.java
+            │   └── util/
+            │       └── AdminUtility.java               # Admin utilities
+            └── webapp/
+                ├── index.jsp                           # Landing page
+                ├── login.jsp                           # Login page
+                ├── register.jsp                        # Registration page
+                ├── home.jsp                            # User home
+                ├── viewProducts.jsp                    # Product listing
+                ├── addProduct.jsp                      # Add product form
+                ├── editProduct.jsp                     # Edit product form
+                ├── myProducts.jsp                      # User's products
+                ├── wishlist.jsp                        # Wishlist page
+                ├── adminDashboard.jsp                  # Admin dashboard
+                ├── adminUsers.jsp                      # User management
+                ├── adminProducts.jsp                   # Product management
+                ├── css/
+                │   └── style.css                       # Styling
+                ├── js/
+                │   └── script.js                       # Client-side logic
+                └── WEB-INF/
+                    └── web.xml                         # Deployment descriptor
 ```
+
+### File Breakdown
+
+| Component | Count | Purpose |
+|-----------|-------|---------|
+| Servlets | 19 | Request handling and business logic |
+| JSP Pages | 12 | UI rendering and user interaction |
+| Models | 1 | Data representation (Product class) |
+| DAOs | 1 | Database connection management |
+| Utilities | 1 | Admin helper functions |
 
 ---
 
 ## ⚙️ Configuration
+
+### web.xml Configuration
+
+The `WEB-INF/web.xml` contains servlet mappings:
+
+```xml
+<servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlet.LoginServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+</servlet-mapping>
+<!-- ... more mappings ... -->
+```
 
 ### Database Configuration
 
@@ -786,173 +755,199 @@ UniTrade/
 
 ```java
 public static Connection getConnection() {
-    try {
-        // Load MySQL driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        
-        // Create connection
-        return DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/unitrade",  // Database URL
-            "root",                                   // Username
-          "mysqlroot"                               // Password
-        );
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return null;
+    // Database credentials
+    String url = "jdbc:mysql://localhost:3306/unitrade";
+    String username = "root";
+    String password = "mysqlroot";  // ⚠️ Change this!
+    
+    // Connection logic
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    return DriverManager.getConnection(url, username, password);
 }
 ```
 
-**Connection Parameters:**
-- **Host:** localhost
-- **Port:** 3306 (MySQL default)
-- **Database:** unitrade
-- **Username:** root
-- **Password:** mysqlroot (change in production!)
-- **Driver:** MySQL Connector/J 9.4.0
+### Environment Variables (Optional)
 
-### File Upload Configuration
+For security, consider using environment variables:
 
-**File:** `src/main/java/servlet/AddProductServlet.java` (Lines 52-53)
-
-```java
-// Local storage (permanent backup)
-String uploadPath = System.getProperty("user.home") + File.separator + 
-                   "Documents" + File.separator + "Projects_Storage" + 
-                   File.separator + "UniTradeUploads";
-
-// Web-accessible storage
-String projectPath = getServletContext().getRealPath("") + "uploads";
+```bash
+export DB_HOST=localhost
+export DB_PORT=3306
+export DB_NAME=unitrade
+export DB_USER=root
+export DB_PASS=mysqlroot
 ```
 
-**Storage Locations:**
-- **Local:** `~/Documents/Projects_Storage/UniTradeUploads/`
-- **Web:** `{PROJECT_ROOT}/uploads/`
+### Session Configuration
 
-### Tomcat Configuration
+Sessions are configured in JSP pages:
 
-**File:** `{TOMCAT_HOME}/conf/server.xml`
-
-```xml
-<!-- Default port configuration -->
-<Connector port="8080" protocol="HTTP/1.1"
-    connectionTimeout="20000"
-    redirectPort="8443" />
-
-<!-- HTTPS configuration (Optional) -->
-<Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
-    maxThreads="150" SSLEnabled="true"
-    scheme="https" secure="true"
-    keystoreFile="path/to/keystore.jks"
-    keystorePass="password" />
+```jsp
+<% 
+    HttpSession session = request.getSession();
+    // Session timeout: 30 minutes (configurable)
+%>
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues & Solutions
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| **"Connection refused"** | MySQL not running | Start MySQL: `mysql.server start` (macOS) |
-| **"Unknown database"** | Database not created | Run SQL setup queries from Installation step 2 |
-| **Servlet returns 404** | Servlet not deployed | Check web.xml mapping, redeploy |
-| **Login doesn't work** | Database connection error | Verify DBConnection.java credentials |
-| **Image won't upload** | Directory permissions | `chmod 755 ~/Documents/Projects_Storage/UniTradeUploads` |
-| **Session not working** | Session timeout | Check Tomcat session configuration |
-| **Blank page after login** | JSP not compiled | Clear browser cache, restart Tomcat |
-| **Database locked** | Concurrent access issue | Restart MySQL service |
+#### 1. Database Connection Failed
+**Error:** `java.sql.SQLException: No suitable driver found`
 
-### Debug Mode
-
-**Enable console logging:**
-
-1. Edit: `src/main/java/servlet/[Servlet].java`
-2. Add: `System.out.println("Debug message");`
-3. Redeploy and check: `{TOMCAT_HOME}/logs/catalina.out`
-
-### Verify Installation
+**Solutions:**
+- Verify MySQL JDBC driver is in classpath
+- Check MySQL server is running: `mysql -u root -p`
+- Verify credentials in `DBConnection.java`
+- Ensure database `unitrade` exists
 
 ```bash
-# Check Java
-java -version
-# Output: java version "11" or higher ✓
+# Check MySQL running
+ps aux | grep mysqld
 
-# Check MySQL
-mysql -u root -p -e "SELECT VERSION();"
-# Output: 8.0.x or higher ✓
+# Restart MySQL (macOS)
+brew services restart mysql
 
-# Check Tomcat
-curl -I http://localhost:8080/
-# Output: HTTP/1.1 200 OK ✓
+# Restart MySQL (Linux)
+sudo systemctl restart mysql
+```
 
-# Check Application
-curl -I http://localhost:8080/UniTrade/
-# Output: HTTP/1.1 200 OK ✓
+#### 2. Tomcat Startup Failures
+**Error:** `CATALINA_HOME not set` or port already in use
+
+**Solutions:**
+```bash
+# Set CATALINA_HOME
+export CATALINA_HOME=/path/to/tomcat
+
+# Check if port 8080 is in use
+lsof -i :8080
+
+# Kill process on port 8080
+kill -9 <PID>
+
+# Try different port (edit catalina.sh if needed)
+```
+
+#### 3. JSP Pages Not Rendering
+**Error:** Blank page or 404 errors
+
+**Solutions:**
+- Check Tomcat logs: `$CATALINA_HOME/logs/catalina.out`
+- Verify WAR deployment: `ls $CATALINA_HOME/webapps/`
+- Check application context in `web.xml`
+
+#### 4. Image Upload Issues
+**Error:** Images not displaying or upload fails
+
+**Solutions:**
+- Verify upload directory has write permissions
+- Check file size limits in servlet configuration
+- Ensure supported image formats (JPG, PNG, GIF)
+- Clear browser cache
+
+#### 5. Session Timeout Issues
+**Error:** "Session expired" when trying to access protected pages
+
+**Solutions:**
+- Increase session timeout in `web.xml`
+- Check if cookies are enabled in browser
+- Verify session management in servlets
+
+```xml
+<session-config>
+    <cookie-config>
+        <http-only>true</http-only>
+    </cookie-config>
+    <tracking-mode>COOKIE</tracking-mode>
+</session-config>
+```
+
+#### 6. Search Not Working
+**Error:** Search returns no results or errors
+
+**Solutions:**
+- Check database indexes are created
+- Verify search parameters are passed correctly
+- Review SearchServlet logs for SQL errors
+
+#### 7. Admin Features Not Accessible
+**Error:** "Access Denied" when accessing admin pages
+
+**Solutions:**
+- Verify user has `is_admin = true` in database
+- Check admin authentication in servlets
+- Ensure session contains admin flag
+
+```sql
+UPDATE users SET is_admin = true WHERE email = 'admin@university.edu';
 ```
 
 ---
 
-## 👥 Contributing
+## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+We welcome contributions from the community! Here's how you can help:
 
-### Getting Started
+### Development Setup
 
-1. **Fork the repository**
+1. **Fork the repository** on GitHub
+2. **Clone your fork:**
    ```bash
    git clone https://github.com/yourusername/UniTrade.git
    cd UniTrade
    ```
 
-2. **Create feature branch**
+3. **Create a feature branch:**
    ```bash
-   git checkout -b feature/amazing-feature
+   git checkout -b feature/your-feature-name
    ```
 
-3. **Make your changes**
-   - Follow Java conventions
-   - Use meaningful commit messages
-   - Add tests for new features
+4. **Make your changes** following code style guidelines
+5. **Test thoroughly** before submitting
 
-4. **Submit pull request**
+### Coding Standards
+
+- Follow Java naming conventions (camelCase for methods/variables)
+- Write meaningful commit messages
+- Add comments for complex logic
+- Test on both Chrome and Firefox
+- Ensure responsive design works on mobile
+
+### Submitting Changes
+
+1. **Commit your changes:**
    ```bash
-   git push origin feature/amazing-feature
+   git commit -m "Add your meaningful message"
    ```
 
-### Code Style
+2. **Push to your fork:**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
-- **Naming:** camelCase for variables/methods, PascalCase for classes
-- **Indentation:** 4 spaces
-- **Comments:** Only for non-obvious code
-- **Line length:** Max 100 characters
+3. **Create a Pull Request** with:
+   - Clear description of changes
+   - Any related issues
+   - Screenshots if UI changes
 
-### Testing
+### Contribution Ideas
 
-Before submitting:
-- ✅ Test all servlet endpoints
-- ✅ Verify database queries
-- ✅ Test file uploads
-- ✅ Check session handling
-- ✅ Validate user inputs
-
-### Feature Ideas
-
-- 🎨 Dark mode toggle
-- 📧 Email notifications
-- 💬 In-app messaging
-- ⭐ Product ratings & reviews
-- 📱 Mobile app
-- 🔔 Real-time notifications
-- 💳 Payment integration
-- 📍 Advanced location features
+- 🐛 Bug fixes and improvements
+- ✨ New features (rating system, messaging, etc.)
+- 📝 Documentation improvements
+- 🎨 UI/UX enhancements
+- 🧪 Additional test coverage
+- 🚀 Performance optimizations
 
 ---
 
 ## 📜 License
 
-No license file is included in this repository.
+This project is provided as-is without a specific license. Please check with the project owner for licensing terms and usage restrictions.
 
 ---
 
@@ -960,9 +955,18 @@ No license file is included in this repository.
 
 ### Getting Help
 
-- Review the servlet classes under `src/main/java/servlet/`
-- Check `DBConnection.java` if the app cannot connect to MySQL
-- Inspect the JSP pages under `src/main/webapp/` for the UI flow
+- **Documentation:** Review this README thoroughly
+- **Database Issues:** Check `src/main/java/dao/DBConnection.java`
+- **Servlet Logic:** Review servlet classes under `src/main/java/servlet/`
+- **UI Issues:** Inspect JSP files under `src/main/webapp/`
+- **Logs:** Check Tomcat logs at `$CATALINA_HOME/logs/`
+
+### Reporting Issues
+
+- Describe the problem in detail
+- Include error messages and stack traces
+- Provide steps to reproduce
+- Mention your environment (OS, Java version, Tomcat version)
 
 ---
 
@@ -970,73 +974,116 @@ No license file is included in this repository.
 
 ### Java & Web Development
 
-- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Jakarta EE Documentation](https://jakarta.ee/)
-- [Servlet Tutorial](https://www.tutorialspoint.com/servlets/)
-- [JSP Tutorial](https://www.tutorialspoint.com/jsp/)
+- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/) - Official Java documentation
+- [Jakarta EE Documentation](https://jakarta.ee/) - Modern Java enterprise platform
+- [Apache Tomcat Documentation](https://tomcat.apache.org/tomcat-10.0-doc/) - Tomcat guide
+- [Servlet Tutorial](https://www.tutorialspoint.com/servlets/) - Servlet fundamentals
+- [JSP Tutorial](https://www.tutorialspoint.com/jsp/) - JSP reference
 
 ### Database
 
-- [MySQL Documentation](https://dev.mysql.com/doc/)
-- [SQL Tutorial](https://www.w3schools.com/sql/)
-- [JDBC Guide](https://docs.oracle.com/javase/tutorial/jdbc/)
+- [MySQL Documentation](https://dev.mysql.com/doc/) - Complete MySQL reference
+- [SQL Tutorial](https://www.w3schools.com/sql/) - SQL basics and advanced
+- [JDBC Guide](https://docs.oracle.com/javase/tutorial/jdbc/) - Java database connectivity
 
-### Tools & Servers
+### Frontend Technologies
 
-- [Apache Tomcat](https://tomcat.apache.org/)
-- [MySQL Workbench](https://www.mysql.com/products/workbench/)
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- [HTML5 Reference](https://developer.mozilla.org/en-US/docs/Web/HTML) - HTML standards
+- [CSS3 Guide](https://developer.mozilla.org/en-US/docs/Web/CSS) - Styling guide
+- [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - JavaScript documentation
+
+### Development Tools
+
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/) - Advanced IDE for Java
+- [Eclipse IDE](https://www.eclipse.org/ide/) - Free Java IDE
+- [MySQL Workbench](https://www.mysql.com/products/workbench/) - Visual MySQL tool
+- [Git Documentation](https://git-scm.com/doc) - Version control
 
 ---
 
 ## 📈 Roadmap
 
 ### Version 1.0 (Current) ✅
-- ✅ Basic CRUD operations
-- ✅ User authentication
-- ✅ Search & filtering
+- ✅ User authentication (login/register)
+- ✅ CRUD operations for products
+- ✅ Search & filtering functionality
 - ✅ Wishlist system
 - ✅ Admin dashboard
+- ✅ Session management
+- ✅ Image upload support
 
 ### Version 1.1 (Planned)
-- 🔄 User profiles & reviews
+- 🔄 User profile management
+- 🔄 Product ratings & reviews
 - 🔄 Email notifications
-- 🔄 Product ratings
-- 🔄 Chat system
+- 🔄 Product categories expansion
+- 🔄 Advanced search with saved searches
 
 ### Version 2.0 (Future)
-- 🔄 Mobile app
+- 🔄 Direct messaging system
 - 🔄 Payment integration
+- 🔄 Mobile app (React Native/Flutter)
+- 🔄 Real-time notifications
 - 🔄 Advanced analytics
-- 🔄 API endpoints
+- 🔄 API endpoints (REST)
+
+### Potential Enhancements
+
+- 📧 Email notifications for new products
+- 💬 In-app messaging between buyers and sellers
+- ⭐ Product ratings & review system
+- 📱 Mobile-responsive design improvements
+- 🔔 Real-time notification system
+- 💳 Payment gateway integration (Stripe, PayPal)
+- 📍 Advanced location-based features
+- 🤖 AI-powered recommendations
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Jakarta EE** - Enterprise Java platform
-- **Apache Tomcat** - Application server
-- **MySQL** - Relational database
-- **Community** - For feedback and support
+Special thanks to:
+
+- **Jakarta EE** - Modern enterprise Java platform
+- **Apache Tomcat** - Reliable application server
+- **MySQL** - Robust relational database
+- **The Open Source Community** - For tools and libraries
+- **Students & Campus Community** - For testing and feedback
 
 ---
 
 ## 📝 Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2024 | Initial release |
-| 0.9 | 2024 | Beta release |
-| 0.1 | 2024 | Development started |
+| Version | Date | Status | Changes |
+|---------|------|--------|---------|
+| 1.0 | 2024 | Current | ✅ Initial release with core features |
+| 0.9 | 2024 | Archived | Beta testing phase |
+| 0.5 | 2024 | Archived | Development started |
+
+---
+
+## 🚀 Getting Started Quick Links
+
+- [Installation Guide](#-installation)
+- [Quick Start](#-quick-start)
+- [Database Setup](#step-2-set-up-mysql-database)
+- [Troubleshooting](#-troubleshooting)
+- [Documentation](#-servlet-api-documentation)
 
 ---
 
 <div align="center">
 
-### Made with ❤️ for the Campus Community
+## Made with ❤️ for the Campus Community
 
-⭐ If you found this helpful, please give it a star!
+### 🌟 Star this repository if you found it helpful!
 
-[Back to Top](#-unitrade---campus-marketplace-platform)
+**Questions? Issues? Contributions?** → Open a GitHub Issue or Pull Request
+
+[⬆ Back to Top](#-unitrade---campus-marketplace-platform)
+
+---
+
+**UniTrade © 2024** | Building Communities Through Commerce
 
 </div>
